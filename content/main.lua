@@ -11,6 +11,6 @@ end
 
 --
 
-function love.update(delta)
+function love.update(dt)
 
 end
