@@ -1,11 +1,11 @@
-conf = {
+configuration = {
     initial_pression=100,
     initial_stress=0,
     initial_exhaustion=0,
     initial_debt=0,
     initial_unhappiness=0,
     initial_wrath=0,
-    number_of_ennemies=5,
+    number_of_ennemies=3,
     ennemies={
         {
             id="test",
@@ -21,7 +21,8 @@ conf = {
                 "psychologist"
             },
             fleeable=true
-        }
+        },
+        { id="test2" }, { id="test3" }, { id="test4" }, { id="test5" }
     },
     items={
         {
