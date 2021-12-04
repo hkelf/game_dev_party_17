@@ -7,6 +7,10 @@ require('source/ux_button')
 
 require('source/ux_hero')
 
+require('source/ux_levels')
+
+require('source/ux_pressure')
+
 --
 
 local UX_HEIGHT = 1080
@@ -19,19 +23,17 @@ local buttons = {}
 
 local canvas = nil
 
-local corridor = nil
-
 local flee_button = nil
 
 local pos = { x = 0, y = 0 }
 
-local pressure = 0
+local room_boss = nil
+
+local room_corridor = nil
 
 local safe = { x = 0, y = 0, w = UX_WIDTH, h = UX_HEIGHT }
 
 local scale = { x = 1, y = 1 }
-
-local size = { w = UX_WIDTH, height = UX_HEIGHT }
 
 local skin = nil
 
@@ -55,47 +57,21 @@ function ux_core_draw()
 
 	love.graphics.setCanvas(canvas)
 
-	love.graphics.draw(corridor, 0, 0)
+	love.graphics.draw(room_boss, 0, 0)
 
 	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
 	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
 
-	ux_core_draw_levels()
+	ux_levels_draw(safe.w - 1451, safe.h - 223)
 
 	ux_core_draw_skillbar()
 
-	ux_core_draw_pressure()
+	ux_pressure_draw(safe.x + 124, safe.h * 0.5 - 350)
 
 	love.graphics.setCanvas()
 
 	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
-
-end
-
---
-
-function ux_core_draw_levels()
-
-	local base = sprite_clip(skin, 360, 369, 196, 203)
-
-	love.graphics.draw(skin, base, safe.w - 1451, safe.h - 223)
-
-end
-
---
-
-function ux_core_draw_pressure()
-
-	local empty = sprite_clip(skin, 37, 19, 52, 546)
-
-	love.graphics.draw(skin, empty, safe.x + 124, safe.h * 0.5 - 350)
-
-	local offset = 546 * pressure
-
-	local filled = sprite_clip(skin, 126, 21 + offset, 52, 546 - offset)
-
-	love.graphics.draw(skin, filled, safe.x + 124, safe.h * 0.5 - 350 + offset)
 
 end
 
@@ -111,25 +87,15 @@ end
 
 --
 
-function ux_core_on_pressure_change(payload)
-
-	local value = payload.body.pression
-
-	local max = payload.body.max
-
-	pressure = value / max
-
-end
-
---
-
 function ux_core_load()
 
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
 
 	ux_core_resize(love.graphics.getWidth(), love.graphics.getHeight())
 
-	corridor = love.graphics.newImage('image/corridor.png')
+	room_boss = love.graphics.newImage('image/decor_boss.png')
+
+	room_corridor = love.graphics.newImage('image/corridor.png')
 
 	skin = love.graphics.newImage('image/final_ui.png')
 
@@ -137,7 +103,9 @@ function ux_core_load()
 
 	ux_core_create_flee_button()
 
-	broker_subscribe('pression_updated', ux_core_on_pressure_change)
+	ux_pressure_load(skin)
+
+	ux_levels_load(skin)
 
 end
 
