@@ -3,17 +3,47 @@ require('source/anim')
 
 --
 
+local STATE_STAND = 0x00
+
+local STATE_WALK = 0x01
+
+--
+
 local aura = nil
 
 local anim_aura = nil
 
-local anim_hero = nil
+local anim_stand = nil
+
+local anim_walk = nil
 
 local has_aura = false
 
 local shadow = nil
 
 local stand = nil
+
+local state = STATE_WALK
+
+local walk = nil
+
+--
+
+function ux_hero_anim()
+
+	if state == STATE_STAND then
+
+		return anim_stand
+
+	end
+
+	if state == STATE_WALK then
+
+		return anim_walk
+
+	end
+
+end
 
 --
 
@@ -49,13 +79,15 @@ end
 
 function ux_hero_draw_hero(x, y)
 
-	local frame = anim_frame(anim_hero)
+	local anim = ux_hero_anim()
+
+	local frame = anim_frame(anim)
 
 	x = x - frame.w * 0.5
 
 	y = y - frame.h
 
-	anim_draw(anim_hero, x, y)
+	anim_draw(anim, x, y)
 
 end
 
@@ -68,6 +100,8 @@ function ux_hero_load()
 	shadow = love.graphics.newImage('image/hero_shadow.png')
 
 	stand = love.graphics.newImage('image/hero_stand.png')
+
+	walk = love.graphics.newImage('image/hero_walk.png')
 
 	anim_aura = anim_new({
 
@@ -87,9 +121,9 @@ function ux_hero_load()
 		}
 	})
 
-	anim_hero = anim_new({
+	anim_stand = anim_new({
 
-		stand = {
+		base = {
 
 			image = stand,
 
@@ -105,9 +139,27 @@ function ux_hero_load()
 		}
 	})
 
+	anim_walk = anim_new({
+
+		base = {
+
+			image = walk,
+
+			frames = {
+
+				{ x = 0, y = 0, w = 396, h = 454, t = 0.1 },
+				{ x = 396, y = 0, w = 396, h = 454, t = 0.1 },
+				{ x = 792, y = 0, w = 396, h = 454, t = 0.2 },
+				{ x = 1188, y = 0, w = 396, h = 454, t = 0.1 },
+				{ x = 0, y = 454, w = 396, h = 454, t = 0.1 },
+				{ x = 396, y = 454, w = 396, h = 454, t = 0.1 }
+			}
+		}
+	})
+
 	anim_play(anim_aura, 'base', 'loop')
 
-	anim_play(anim_hero, 'stand', 'loop')
+	anim_play(ux_hero_anim(), 'base', 'loop')
 
 end
 
@@ -121,6 +173,6 @@ function ux_hero_update(dt)
 
 	end
 
-	anim_update(anim_hero, dt)
+	anim_update(ux_hero_anim(), dt)
 
 end
