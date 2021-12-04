@@ -34,21 +34,25 @@ end
 -- debug
 function debug_events()
     if love.keyboard.isDown("1") then
-        broker_send("button_pressed", {body={id="slash", type="SKILL"}})
-        print("The 1 key is held down!")
+        broker_send("button_pressed", {body={type="ATTACK"}})
     end
     if love.keyboard.isDown("2") then
-        print("The 1 key is held down!")
+        broker_send("button_pressed", {body={type="DEFEND"}})
     end
     if love.keyboard.isDown("3") then
-        print("The 1 key is held down!")
+        broker_send("button_pressed", {body={type="FIREBALL"}})
     end
     if love.keyboard.isDown("4") then
-        print("The 1 key is held down!")
+        broker_send("button_pressed", {body={type="OMNISLASH"}})
+    end
+    if love.keyboard.isDown("5") then
+        broker_send("button_pressed", {body={type="BERSERK"}})
+    end
+    if love.keyboard.isDown("6") then
+        broker_send("button_pressed", {body={type="BLEED"}})
     end
     if love.keyboard.isDown("f") then
         broker_send("button_pressed", {body={type="FLEE"}})
-        print("The f key is held down!")
     end
 end
 
@@ -75,9 +79,9 @@ function debug_console()
                 , 0, 150
             )
         end
-        if game_state.selected then
-            love.graphics.print( 
-                "selected : " .. game_state.selected.type .. "\n"
+        if game_state.current_skill then
+            love.graphics.print(
+                "selected : " .. game_state.current_skill.id
                 , 0, 200
             )
         end

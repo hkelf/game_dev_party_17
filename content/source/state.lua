@@ -2,6 +2,7 @@ require("source/configuration")
 require("source/utils")
 require("source/init_state")
 require("source/fight_scene")
+require("source/corridor_scene")
 require("source/fight_phase/player_death_fight_phase")
 
 game_state = {
@@ -28,11 +29,18 @@ function update_state(dt)
     if not game_state.scene.type then
         init_fight()
     end
-    if (game_state.scene.type == "FIGHT") then 
+    if game_state.scene.type == "FIGHT" then 
         update_fight(dt)
     end
 end
 
-broker_subscribe("button_pressed", function(payload) 
-    game_state.selected = payload.body 
-end)
+broker_subscribe(
+    "button_pressed", 
+    function(payload)
+        if payload.body.type == "FLEE" then
+            game_state.selected = {type="FLEE"}
+        else
+            game_state.selected = {type="SKILL", id=payload.body.type}
+        end
+    end
+)

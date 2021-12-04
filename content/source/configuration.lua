@@ -67,7 +67,7 @@ configuration = {
     },
     skills={
         {
-            id="slash",
+            id="ATTACK",
             damages={from=0, to=100},
             buff="motivation",
             debuff="bleed",
@@ -78,7 +78,72 @@ configuration = {
                 unhappiness={from=10, to=10},
                 wrath={from=0, to=0},
             }
-        }
+        },
+        {
+            id="DEFEND",
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
+            self_damages={
+                stress={from=10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
+                wrath={from=0, to=0},
+            }
+        },
+        {
+            id="FIREBALL",
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
+            self_damages={
+                stress={from=10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
+                wrath={from=0, to=0},
+            }
+        },
+        {
+            id="OMNISLASH",
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
+            self_damages={
+                stress={from=10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
+                wrath={from=0, to=0},
+            }
+        },
+        {
+            id="BERSERK",
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
+            self_damages={
+                stress={from=10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
+                wrath={from=0, to=0},
+            }
+        },
+        {
+            id="BLEED",
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
+            self_damages={
+                stress={from=10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
+                wrath={from=0, to=0},
+            }
+        },
     },
     buff={
         {

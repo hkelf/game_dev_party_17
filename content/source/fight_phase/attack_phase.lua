@@ -40,5 +40,6 @@ function update_attack_phase(dt)
         -- resolve_buff()
         resolve_self_damages()
         init_ennemy_attack_phase()
+        game_state.current_skill = nil
     end
 end

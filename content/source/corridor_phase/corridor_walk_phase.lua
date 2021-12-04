@@ -5,5 +5,8 @@ function init_walk_phase()
 end
 
 function update_walk_phase(dt)
-    print("coucou")
+    game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
+    if game_state.scene.timeout == 0 then
+        init_fight
+    end
 end

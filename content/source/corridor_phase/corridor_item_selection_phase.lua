@@ -5,5 +5,5 @@ function init_item_selection_phase()
 end
 
 function update_item_selection_phase(dt)
-    print("coucou")
+    
 end
