@@ -27,3 +27,15 @@ function table.clone(orig)
     end
     return copy
 end
+
+function find_by_id(id, table)
+    for _, e in ipairs(table) do 
+        if e.id == id then return e end
+    end
+
+    return nil
+end
+
+function rnd_in_range(range) 
+    return math.random(range.from, range.to)
+end

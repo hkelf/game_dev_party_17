@@ -1,5 +1,7 @@
 configuration = {
-    initial_pression=100,
+    max=1,
+    min=-1,
+    initial_pression=0,
     initial_stress=0,
     initial_exhaustion=0,
     initial_debt=0,
@@ -78,5 +80,16 @@ configuration = {
         dot={from=5, to=10},
         -- Percentage
         resistance={from=5, to=10}
+    },
+    pression_penalty= {
+        timeout=5, -- seconds
+        stress={from=-10, to=0},
+        exhaustion={from=0, to=0},
+        debt={from=-5, to=-5},
+        unhappiness={from=-10, to=-10},
+        wrath={from=0, to=0},
+    },
+    fight_phase_timeouts={
+        ATTACK_PHASE=3
     }
 }
