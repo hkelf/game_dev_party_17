@@ -17,6 +17,7 @@ function init_player_turn_phase()
     game_state.scene.phase = "PLAYER_TURN_PHASE"
     game_state.scene.pression = configuration.initial_pression
     broker_send("fight_phase", {sender="player_turn", body={phase=game_state.scene.phase}})
+    broker_send("pression_updated", {sender="player_turn", body={pression=game_state.pression, max=configuration.initial_pression}})
 end
 
 function update_player_turn_phase(dt)
