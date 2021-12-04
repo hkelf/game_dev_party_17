@@ -26,6 +26,14 @@ end
 
 --
 
+function anim_frame(anim)
+
+	return anim.frames[anim.cursor]
+
+end
+
+--
+
 function anim_new(defs)
 
 	local anim = {}
@@ -63,6 +71,16 @@ end
 function anim_pause(anim)
 
 	anim.playing = false
+
+end
+
+--
+
+function anim_static(anim, name)
+
+	anim_play(anim, name, 'once')
+
+	anim_update(anim, 999)
 
 end
 
