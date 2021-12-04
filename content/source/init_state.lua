@@ -53,6 +53,7 @@ function initialize_state()
     game_state.wrath=configuration.initial_wrath
     game_state.scene={}
     game_state.selected={}
+    game_state.player_state={}
     
     init_ennemy_pool(game_state)
 

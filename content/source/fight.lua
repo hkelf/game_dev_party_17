@@ -1,6 +1,6 @@
 require("source/broker")
 require("source/utils")
-reauire("source/fight_player_turn")
+require("source/fight_player_turn")
 
 local select_ennemy = function() 
     local rnd = math.random(#game_state.ennemy_pool)
@@ -23,15 +23,18 @@ function init_fight()
         type="FIGHT",
         phase="PLAYER_TURN"
     }
+    game_state.player_state.state = "IDLE"
 
     select_ennemy()
     print("FIGHT_STARTED\n")
     print_table(game_state)
     print("\n")
+    broker_send("fight_started", {sender="fight"})
+    broker_send("player_state")
 end
 
 function update_fight()
-    if game_state.scene.phase = "PLAYER_TURN" then
+    if game_state.scene.phase == "PLAYER_TURN" then
         process_player_turn()
     end
 end
