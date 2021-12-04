@@ -1,6 +1,8 @@
 
 require('source/broker')
 
+require('source/sprite')
+
 require('source/ux_button')
 
 require('source/ux_hero')
@@ -51,13 +53,25 @@ function ux_core_draw()
 
 	love.graphics.clear(0.45, 0.45, 0.45)
 
-	ux_hero_draw(safe.w * 0.25, safe.h * 0.75)
+	ux_hero_draw(safe.w * 0.25, safe.h * 0.6)
 
-	ux_button_draw(flee_button, safe.w * 0.25, safe.h * 0.9)
+	ux_core_draw_skillbar()
+
+	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
 
 	love.graphics.setCanvas()
 
 	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
+
+end
+
+--
+
+function ux_core_draw_skillbar()
+
+	local skillbar = sprite_clip(skin, 612, 373, 1198, 203)
+
+	love.graphics.draw(skin, skillbar, safe.w - 1228, safe.h - 223)
 
 end
 
@@ -99,9 +113,9 @@ function ux_core_resize(width, height)
 
 	safe.y = -pos.y * unscale.y
 
-	safe.w = UX_WIDTH - safe.x * 2
+	safe.w = UX_WIDTH - safe.x
 
-	safe.h = UX_HEIGHT - safe.y * 2
+	safe.h = UX_HEIGHT - safe.y
 
 end
 
