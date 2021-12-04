@@ -1,7 +1,6 @@
 local update_pression = function(dt)
     local pression = game_state.current_ennemy.pression
     local rnd = math.random(pression.from, pression.to)
-    print(math.min(game_state.pression - rnd * dt, 0))
     game_state.pression = math.max(game_state.pression - rnd * dt, 0)
     broker_send("pression_updated", {sender="player_turn", body={pression=game_state.pression, max=configuration.initial_pression}})
 end
