@@ -57,7 +57,6 @@ function debug_events()
 end
 
 function debug_console()
-    love.graphics.setColor( 0, 0, 0, 1 )
     love.graphics.print( 
         "pression : " .. game_state.pression .. "\n" ..
         "stress : " .. game_state.stress .. "\n" ..
@@ -86,6 +85,4 @@ function debug_console()
             )
         end
     end
-    love.graphics.setColor( 1, 1, 1, 1 )
-
 end
