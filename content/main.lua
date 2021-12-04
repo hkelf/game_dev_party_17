@@ -16,4 +16,5 @@ end
 --
 
 function love.update(dt)
+    update_state()
 end
