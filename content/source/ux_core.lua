@@ -23,9 +23,9 @@ function ux_core_draw()
 
 	love.graphics.setCanvas(canvas)
 
-	love.graphics.clear(1, 1, 1)
+	love.graphics.clear(0.2, 0.2, 0.2)
 
-	ux_hero_draw(safe.x + 300, safe.h - 700)
+	ux_hero_draw(safe.x + 450, safe.h - 200)
 
 	-- ...
 

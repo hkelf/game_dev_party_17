@@ -26,6 +26,14 @@ end
 
 --
 
+function anim_frame(anim)
+
+	return anim.frames[anim.cursor]
+
+end
+
+--
+
 function anim_new(defs)
 
 	local anim = {}
