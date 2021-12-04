@@ -1,5 +1,5 @@
 
-require('broker')
+require('source/broker')
 
 require('source/ux_button')
 
