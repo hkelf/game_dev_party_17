@@ -11,6 +11,10 @@ local finance = nil
 
 local mourn = nil
 
+local neighbour = nil
+
+local work = nil
+
 --
 
 function ux_boss_draw(x, y)
@@ -29,11 +33,15 @@ function ux_boss_load()
 
 	mourn = love.graphics.newImage('image/boss_mourn.png')
 
+	neighbour = love.graphics.newImage('image/boss_neighbour.png')
+
+	work = love.graphics.newImage('image/boss_work.png')
+
 	anim = anim_new({
 
 		base = {
 
-			image = breakup,
+			image = work,
 
 			frames = {
 
