@@ -7,24 +7,53 @@ configuration = {
     initial_debt=0,
     initial_unhappiness=0,
     initial_wrath=0,
-    number_of_ennemies=3,
+    number_of_ennemies=1,
     ennemies={
         {
             id="test",
             image="dummy.png",
-            stress={from=0, to=10},
-            exhaustion={from=0, to=10},
-            debt={from=0, to=10},
-            unhappiness={from=0, to=10},
-            wrath={from=0, to=10},
-            pression={from=0, to=5},
-            health=100,
+            stress={from=0, to=0.1},
+            exhaustion={from=0, to=0.1},
+            debt={from=0, to=0.1},
+            unhappiness={from=0, to=0.1},
+            wrath={from=0, to=0.1},
+            pression={from=0, to=0.05},
+            health=1,
             drops={
                 "psychologist"
             },
             fleeable=true
         },
-        { id="test2" }, { id="test3" }, { id="test4" }, { id="test5" }
+        {
+            id="test2",
+            image="dummy.png",
+            stress={from=0, to=0.1},
+            exhaustion={from=0, to=0.1},
+            debt={from=0, to=0.1},
+            unhappiness={from=0, to=0.1},
+            wrath={from=0, to=0.1},
+            pression={from=0, to=0.05},
+            health=1,
+            drops={
+                "psychologist"
+            },
+            fleeable=true
+        },
+        {
+            id="test3",
+            image="dummy.png",
+            stress={from=0, to=0.1},
+            exhaustion={from=0, to=0.1},
+            debt={from=0, to=0.1},
+            unhappiness={from=0, to=0.1},
+            wrath={from=0, to=0.1},
+            pression={from=0, to=0.05},
+            health=1,
+            drops={
+                "psychologist"
+            },
+            fleeable=true
+        }    
     },
     items={
         {
@@ -39,7 +68,7 @@ configuration = {
     skills={
         {
             id="slash",
-            damages={from=0, to=10},
+            damages={from=0, to=0.2},
             buff={"motivation"},
             debuff={"bleed"},
             self_damages={
@@ -90,6 +119,9 @@ configuration = {
         wrath={from=0, to=0},
     },
     fight_phase_timeouts={
-        ATTACK_PHASE=3
+        ATTACK_PHASE=2, 
+        ENNEMY_ATTACK_PHASE=2,
+        ENNEMY_DEATH_PHASE=2,
+        PLAYER_FLEE_PHASE=2,
     }
 }

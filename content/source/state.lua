@@ -6,7 +6,14 @@ require("source/fight")
 game_state = {
 }
 
+local check_player_state = function()
+    if stress == 1 or exhaustion == 1 or debt == 1 or unhappiness == 1 or wrath == 1 then
+        init_player_death_phase()
+    end
+end
+
 function update_state(dt) 
+    check_player_state()
     if not game_state.scene.type then
         init_fight()
     end
@@ -15,6 +22,6 @@ function update_state(dt)
     end
 end
 
-broker_subscribe("button_skill_pressed", function(payload) 
-    game_state.selected = payload 
+broker_subscribe("button_pressed", function(payload) 
+    game_state.selected = payload.body 
 end)

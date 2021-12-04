@@ -16,7 +16,8 @@ end
 
 function init_player_turn_phase()
     game_state.selected = nil
-    game_state.scene.phase = "PLAYER_TURN"
+    game_state.scene.phase = "PLAYER_TURN_PHASE"
+    game_state.scene.pression = 0
     broker_send("fight_phase", {sender="player_turn", body={phase=game_state.scene.phase}})
 end
 
@@ -26,5 +27,7 @@ function update_player_turn_phase(dt)
     if game_state.selected and game_state.selected.type == "SKILL" then
         init_attack_phase()
         return
+    elseif game_state.selected and game_state.selected.type == "FLEE" then
+        init_player_flee_phase()
     end
 end

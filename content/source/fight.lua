@@ -1,6 +1,9 @@
 require("source/broker")
 require("source/utils")
 require("source/fight_phase/player_turn_phase")
+require("source/fight_phase/attack_phase")
+require("source/fight_phase/ennemy_attack_phase")
+require("source/fight_phase/player_flee_phase")
 
 local select_ennemy = function() 
     local rnd = math.random(#game_state.ennemy_pool)
@@ -18,6 +21,12 @@ local select_ennemy = function()
     broker_send("ennemy_created", {sender="fight", body=game_state.current_ennemy})
 end
 
+local check_ennemy_state = function()
+    if game_state.current_ennemy.health <= 0 then
+        init_ennemy_death_phase()
+    end 
+end
+
 function init_fight() 
     game_state.scene = {
         type="FIGHT"
@@ -31,18 +40,19 @@ function init_fight()
 end
 
 function update_fight(dt)
+    check_ennemy_state()
     if game_state.scene.phase == "PLAYER_TURN_PHASE" then
-        process_player_turn(dt)
-    elseif game_state.scene.phase == "PLAYER_ATTACK_PHASE" then
-        process_player_attack_phase(dt)
+        update_player_turn_phase(dt)
+    elseif game_state.scene.phase == "ATTACK_PHASE" then
+        update_attack_phase(dt)
     elseif game_state.scene.phase == "ENNEMY_ATTACK_PHASE" then
-        process_ennemy_attack_phase(dt)
-    elseif game_state.scene.phase == "FLEE_PHASE" then
-        process_player_flee_phase(dt)
+        update_ennemy_attack_phase(dt)
+    elseif game_state.scene.phase == "PLAYER_FLEE_PHASE" then
+        update_player_flee_phase(dt)
     elseif game_state.scene.phase == "ENNEMY_DEATH_PHASE" then
-        process_ennemy_death_phase(dt)
+        update_ennemy_death_phase(dt)
     elseif game_state.scene.phase == "PLAYER_DEATH_PHASE" then
-        process_player_death_phase(dt)
+        update_player_death_phase(dt)
     end
 end
 
