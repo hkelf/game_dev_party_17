@@ -1,6 +1,6 @@
 configuration = {
-    max=1,
-    min=-1,
+    max=100,
+    min=-100,
     initial_pression=0,
     initial_stress=0,
     initial_exhaustion=0,
@@ -12,13 +12,13 @@ configuration = {
         {
             id="test",
             image="dummy.png",
-            stress={from=0, to=0.1},
-            exhaustion={from=0, to=0.1},
-            debt={from=0, to=0.1},
-            unhappiness={from=0, to=0.1},
-            wrath={from=0, to=0.1},
-            pression={from=0, to=0.05},
-            health=1,
+            stress={from=0, to=10},
+            exhaustion={from=0, to=10},
+            debt={from=0, to=10},
+            unhappiness={from=0, to=10},
+            wrath={from=0, to=10},
+            pression={from=0, to=5},
+            health=150,
             drops={
                 "psychologist"
             },
@@ -27,13 +27,13 @@ configuration = {
         {
             id="test2",
             image="dummy.png",
-            stress={from=0, to=0.1},
-            exhaustion={from=0, to=0.1},
-            debt={from=0, to=0.1},
-            unhappiness={from=0, to=0.1},
-            wrath={from=0, to=0.1},
-            pression={from=0, to=0.05},
-            health=1,
+            stress={from=0, to=10},
+            exhaustion={from=0, to=10},
+            debt={from=0, to=10},
+            unhappiness={from=0, to=10},
+            wrath={from=0, to=10},
+            pression={from=0, to=5},
+            health=200,
             drops={
                 "psychologist"
             },
@@ -42,13 +42,13 @@ configuration = {
         {
             id="test3",
             image="dummy.png",
-            stress={from=0, to=0.1},
-            exhaustion={from=0, to=0.1},
-            debt={from=0, to=0.1},
-            unhappiness={from=0, to=0.1},
-            wrath={from=0, to=0.1},
-            pression={from=0, to=0.05},
-            health=1,
+            stress={from=0, to=10},
+            exhaustion={from=0, to=10},
+            debt={from=0, to=10},
+            unhappiness={from=0, to=10},
+            wrath={from=0, to=10},
+            pression={from=0, to=5},
+            health=120,
             drops={
                 "psychologist"
             },
@@ -68,14 +68,14 @@ configuration = {
     skills={
         {
             id="slash",
-            damages={from=0, to=0.2},
+            damages={from=0, to=30},
             buff={"motivation"},
             debuff={"bleed"},
             self_damages={
-                stress={from=-10, to=0},
+                stress={from=10, to=0},
                 exhaustion={from=0, to=0},
-                debt={from=-5, to=-5},
-                unhappiness={from=-10, to=-10},
+                debt={from=5, to=5},
+                unhappiness={from=10, to=10},
                 wrath={from=0, to=0},
             }
         }
@@ -123,5 +123,6 @@ configuration = {
         ENNEMY_ATTACK_PHASE=2,
         ENNEMY_DEATH_PHASE=2,
         PLAYER_FLEE_PHASE=2,
+        PLAYER_DEATH_PHASE=5,
     }
 }

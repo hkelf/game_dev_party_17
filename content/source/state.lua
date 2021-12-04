@@ -2,12 +2,20 @@ require("source/configuration")
 require("source/utils")
 require("source/init_state")
 require("source/fight")
+require("source/fight_phase/player_death_fight_phase")
 
 game_state = {
 }
 
+local init_player_death_fight_phase = function()
+    if scene.type == "FIGHT" then
+        init_player_death_fight_phase()
+    elseif scene.type == "ITEM" then
+    end
+end
+
 local check_player_state = function()
-    if stress == 1 or exhaustion == 1 or debt == 1 or unhappiness == 1 or wrath == 1 then
+    if stress == configuration.max or exhaustion == configuration.max or debt == configuration.max or unhappiness == configuration.max or wrath == configuration.max then
         init_player_death_phase()
     end
 end

@@ -1,9 +1,9 @@
 local resolve_damages = function() 
-    game_state.stress = math.min(0, game_state.stress - rnd_in_range(game_state.current_ennemy.stress))
-    game_state.exhaustion = math.min(0, game_state.exhaustion - rnd_in_range(game_state.current_ennemy.exhaustion))
-    game_state.debt = math.min(0, game_state.debt - rnd_in_range(game_state.current_ennemy.debt))
-    game_state.unhappiness = math.min(0, game_state.unhappiness - rnd_in_range(game_state.current_ennemy.unhappiness))
-    game_state.wrath = math.min(0, game_state.wrath - rnd_in_range(game_state.current_ennemy.wrath))
+    game_state.stress = math.max(0, game_state.stress + rnd_in_range(game_state.current_ennemy.stress))
+    game_state.exhaustion = math.max(0, game_state.exhaustion + rnd_in_range(game_state.current_ennemy.exhaustion))
+    game_state.debt = math.max(0, game_state.debt + rnd_in_range(game_state.current_ennemy.debt))
+    game_state.unhappiness = math.max(0, game_state.unhappiness + rnd_in_range(game_state.current_ennemy.unhappiness))
+    game_state.wrath = math.max(0, game_state.wrath + rnd_in_range(game_state.current_ennemy.wrath))
 end
 
 function init_ennemy_attack_phase()
