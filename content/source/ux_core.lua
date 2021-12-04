@@ -19,8 +19,6 @@ local UX_WIDTH = 1920
 
 --
 
-local buttons = {}
-
 local canvas = nil
 
 local flee_button = nil
@@ -35,9 +33,43 @@ local safe = { x = 0, y = 0, w = UX_WIDTH, h = UX_HEIGHT }
 
 local scale = { x = 1, y = 1 }
 
+local skill_buttons = nil
+
+local skill_attack = nil
+
+local skill_berserk = nil
+
+local skill_bleed = nil
+
+local skill_defend = nil
+
+local skill_fireball = nil
+
+local skill_omnislash = nil
+
 local skin = nil
 
 local unscale = { x = 1, y = 1 }
+
+--
+
+function ux_core_create_buttons()
+
+	ux_core_create_flee_button()
+
+	skill_attack = ux_core_create_skill_button(0)
+
+	skill_defend = ux_core_create_skill_button(1)
+
+	skill_fireball = ux_core_create_skill_button(2)
+
+	skill_omnislash = ux_core_create_skill_button(3)
+
+	skill_berserk = ux_core_create_skill_button(4)
+
+	skill_bleed = ux_core_create_skill_button(5)
+
+end
 
 --
 
@@ -53,6 +85,20 @@ end
 
 --
 
+function ux_core_create_skill_button(id)
+
+	local offset = 8 + id * 198
+
+	local normal = { x = offset, y = 6, w = 193, h = 181 }
+
+	local pressed = { x = offset, y = 212, w = 193, h = 181 }
+
+	return ux_button_new(skill_buttons, normal, pressed)
+
+end
+
+--
+
 function ux_core_draw()
 
 	love.graphics.setCanvas(canvas)
@@ -61,17 +107,37 @@ function ux_core_draw()
 
 	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
-	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
-
 	ux_levels_draw(safe.w - 1451, safe.h - 223)
 
 	ux_core_draw_skillbar()
 
 	ux_pressure_draw(safe.x + 124, safe.h * 0.5 - 350)
 
+	ux_core_draw_buttons()
+
 	love.graphics.setCanvas()
 
 	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
+
+end
+
+--
+
+function ux_core_draw_buttons()
+
+	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
+
+	ux_button_draw(skill_attack, safe.w - 1121, safe.h - 120)
+
+	ux_button_draw(skill_defend, safe.w - 923, safe.h - 120)
+
+	ux_button_draw(skill_fireball, safe.w - 725, safe.h - 120)
+
+	ux_button_draw(skill_omnislash, safe.w - 527, safe.h - 120)
+
+	ux_button_draw(skill_berserk, safe.w - 329, safe.h - 120)
+
+	ux_button_draw(skill_bleed, safe.w - 131, safe.h - 120)
 
 end
 
@@ -99,13 +165,15 @@ function ux_core_load()
 
 	skin = love.graphics.newImage('image/final_ui.png')
 
-	ux_hero_load()
+	skill_buttons = love.graphics.newImage('image/skill_buttons.png')
 
-	ux_core_create_flee_button()
+	ux_hero_load()
 
 	ux_pressure_load(skin)
 
 	ux_levels_load(skin)
+
+	ux_core_create_buttons()
 
 end
 
@@ -156,6 +224,72 @@ function ux_core_update(dt)
 			sender = 'ux_core',
 
 			body = { type = 'FLEE' }
+		})
+
+	end
+
+	if ux_button_update(skill_attack, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'ATTACK' }
+		})
+
+	end
+
+	if ux_button_update(skill_defend, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'DEFEND' }
+		})
+
+	end
+
+	if ux_button_update(skill_fireball, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'FIREBALL' }
+		})
+
+	end
+
+	if ux_button_update(skill_omnislash, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'OMNISLASH' }
+		})
+
+	end
+
+	if ux_button_update(skill_berserk, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'BERSERK' }
+		})
+
+	end
+
+	if ux_button_update(skill_bleed, mx, my) then
+
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'BLEED' }
 		})
 
 	end
