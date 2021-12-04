@@ -15,11 +15,12 @@ local set_pression = function()
 end
 
 function init_player_turn_phase()
+    game_state.selected = nil
     game_state.scene.phase = "PLAYER_TURN"
     broker_send("fight_phase", {sender="player_turn", body={phase=game_state.scene.phase}})
 end
 
-function update_player_turn(dt)
+function update_player_turn_phase(dt)
     -- update_pression()
     -- update_health()
     if game_state.selected and game_state.selected.type == "SKILL" then

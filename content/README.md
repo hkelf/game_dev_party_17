@@ -29,3 +29,7 @@ body={ new_state= game_state.player_state.state } }
 -- values: PLAYER_PHASE, FLEE_PHASE, ATTACK_PHASE, ENNEMY_ATTACK_PHASE, PLAYER_DEATH_PHASE, ENNEMY_DEATH_PHASE
 {phase=game_state.scene.phase}
 ```
+* button_skill_pressed
+```
+{type="SKILL/FLEE", id="skill id"}
+```

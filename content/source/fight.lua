@@ -1,6 +1,6 @@
 require("source/broker")
 require("source/utils")
-require("source/fight_phase/player_turn")
+require("source/fight_phase/player_turn_phase")
 
 local select_ennemy = function() 
     local rnd = math.random(#game_state.ennemy_pool)
@@ -30,19 +30,19 @@ function init_fight()
     init_player_turn_phase()
 end
 
-function update_fight()
+function update_fight(dt)
     if game_state.scene.phase == "PLAYER_TURN_PHASE" then
-        process_player_turn()
+        process_player_turn(dt)
     elseif game_state.scene.phase == "PLAYER_ATTACK_PHASE" then
-        process_player_attack_phase()
+        process_player_attack_phase(dt)
     elseif game_state.scene.phase == "ENNEMY_ATTACK_PHASE" then
-        process_ennemy_attack_phase()
+        process_ennemy_attack_phase(dt)
     elseif game_state.scene.phase == "FLEE_PHASE" then
-        process_player_flee_phase()
+        process_player_flee_phase(dt)
     elseif game_state.scene.phase == "ENNEMY_DEATH_PHASE" then
-        process_ennemy_death_phase()
+        process_ennemy_death_phase(dt)
     elseif game_state.scene.phase == "PLAYER_DEATH_PHASE" then
-        process_player_death_phase()
+        process_player_death_phase(dt)
     end
 end
 
