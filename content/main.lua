@@ -17,6 +17,12 @@ end
 
 --
 
+function love.resize(width, height)
+    ux_core_resize(width, height)
+end
+
+--
+
 function love.update(dt)
     update_state()
     ux_core_update(dt)
