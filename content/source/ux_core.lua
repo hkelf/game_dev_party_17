@@ -25,6 +25,8 @@ local flee_button = nil
 
 local pos = { x = 0, y = 0 }
 
+local pressure = 0
+
 local safe = { x = 0, y = 0, w = UX_WIDTH, h = UX_HEIGHT }
 
 local scale = { x = 1, y = 1 }
@@ -55,15 +57,45 @@ function ux_core_draw()
 
 	love.graphics.draw(corridor, 0, 0)
 
-	ux_hero_draw(safe.w * 0.25, safe.h * 0.6)
+	ux_hero_draw(safe.x + 400, safe.h * 0.6)
+
+	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
+
+	ux_core_draw_levels()
 
 	ux_core_draw_skillbar()
 
-	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
+	ux_core_draw_pressure()
 
 	love.graphics.setCanvas()
 
 	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
+
+end
+
+--
+
+function ux_core_draw_levels()
+
+	local base = sprite_clip(skin, 360, 369, 196, 203)
+
+	love.graphics.draw(skin, base, safe.w - 1451, safe.h - 223)
+
+end
+
+--
+
+function ux_core_draw_pressure()
+
+	local empty = sprite_clip(skin, 37, 19, 52, 546)
+
+	love.graphics.draw(skin, empty, safe.x + 124, safe.h * 0.5 - 350)
+
+	local offset = 546 * pressure
+
+	local filled = sprite_clip(skin, 126, 21 + offset, 52, 546 - offset)
+
+	love.graphics.draw(skin, filled, safe.x + 124, safe.h * 0.5 - 350 + offset)
 
 end
 
@@ -74,6 +106,18 @@ function ux_core_draw_skillbar()
 	local skillbar = sprite_clip(skin, 612, 373, 1198, 203)
 
 	love.graphics.draw(skin, skillbar, safe.w - 1228, safe.h - 223)
+
+end
+
+--
+
+function ux_core_on_pressure_change(payload)
+
+	local value = payload.body.pression
+
+	local max = payload.body.max
+
+	pressure = value / max
 
 end
 
@@ -92,6 +136,8 @@ function ux_core_load()
 	ux_hero_load()
 
 	ux_core_create_flee_button()
+
+	broker_subscribe('pression_updated', ux_core_on_pressure_change)
 
 end
 
