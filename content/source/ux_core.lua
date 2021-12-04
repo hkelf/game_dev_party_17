@@ -117,7 +117,12 @@ function ux_core_update(dt)
 
 	if ux_button_update(flee_button, mx, my) then
 
-		broker_send('button_pressed', { type = 'FLEE' })
+		broker_send('button_pressed', {
+
+			sender = 'ux_core',
+
+			body = { type = 'FLEE' }
+		})
 
 	end
 
