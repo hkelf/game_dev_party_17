@@ -46,8 +46,8 @@ function update_fight(dt)
         update_player_flee_phase(dt)
     elseif game_state.scene.phase == "ENNEMY_DEATH_PHASE" then
         update_ennemy_death_phase(dt)
-    elseif game_state.scene.phase == "PLAYER_DEATH_PHASE" then
-        update_player_death_phase(dt)
+    elseif game_state.scene.phase == "PLAYER_DEATH_FIGHT_PHASE" then
+        update_player_death_fight_phase(dt)
     end
 end
 

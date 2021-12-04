@@ -11,7 +11,8 @@ function init_corridor()
 end
 
 function update_corridor(dt)
-    if game_state.scene.phase == "PLAYER_TURN_PHASE" then
+
+    if game_state.scene.phase == "ITME_SELECTION_PHASE" then
         update_player_turn_phase(dt)
     elseif game_state.scene.phase == "ATTACK_PHASE" then
         update_attack_phase(dt)

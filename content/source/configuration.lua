@@ -123,6 +123,10 @@ configuration = {
         ENNEMY_ATTACK_PHASE=2,
         ENNEMY_DEATH_PHASE=2,
         PLAYER_FLEE_PHASE=2,
-        PLAYER_DEATH_PHASE=5,
-    }
+        PLAYER_DEATH_FIGHT_PHASE=5,
+    },
+    corridor_phase_timeouts={
+        WALK_PHASE=2,
+        ITEM_SELECTION_PHASE=2,
+    },
 }

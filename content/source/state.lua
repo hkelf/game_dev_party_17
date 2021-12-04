@@ -8,15 +8,18 @@ game_state = {
 }
 
 local init_player_death_fight_phase = function()
-    if scene.type == "FIGHT" then
+    if game_state.scene.type == "FIGHT" then
         init_player_death_fight_phase()
-    elseif scene.type == "ITEM" then
+    elseif game_state.scene.type == "ITEM" then
     end
 end
 
 local check_player_state = function()
-    if stress == configuration.max or exhaustion == configuration.max or debt == configuration.max or unhappiness == configuration.max or wrath == configuration.max then
-        init_player_death_phase()
+    if game_state.stress == configuration.max 
+        or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
+        or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
+    then
+        init_player_death_fight_phase()
     end
 end
 
