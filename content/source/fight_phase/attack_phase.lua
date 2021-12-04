@@ -9,7 +9,7 @@ local resolve_self_damages = function()
     game_state.debt = math.max(0, game_state.debt + rnd_in_range(game_state.current_skill.self_damages.debt))
     game_state.unhappiness = math.max(0, game_state.unhappiness + rnd_in_range(game_state.current_skill.self_damages.unhappiness))
     game_state.wrath = math.max(0, game_state.wrath + rnd_in_range(game_state.current_skill.self_damages.wrath))
-    broker_send("ennemy_health_update", {sender="attack_phase", body={health=game_state.current_ennemy.health}})
+    broker_send("player_health_update", {sender="attack_phase", body={state=game_state}})
 end
 
 local resolve_buff = function()

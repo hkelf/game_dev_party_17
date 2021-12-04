@@ -4,6 +4,7 @@ local resolve_damages = function()
     game_state.debt = math.max(0, game_state.debt + rnd_in_range(game_state.current_ennemy.debt))
     game_state.unhappiness = math.max(0, game_state.unhappiness + rnd_in_range(game_state.current_ennemy.unhappiness))
     game_state.wrath = math.max(0, game_state.wrath + rnd_in_range(game_state.current_ennemy.wrath))
+    broker_send("player_health_update", {sender="ennemy_attack_phase", body={state=game_state}})
 end
 
 function init_ennemy_attack_phase()

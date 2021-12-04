@@ -7,7 +7,12 @@ end
 
 local update_health = function(dt)
     if pression == configuration.max then
-        
+        game_state.stress = math.max(0, game_state.stress + rnd_in_range(game_state.current_skill.self_damages.stress))
+        game_state.exhaustion = math.max(0, game_state.exhaustion + rnd_in_range(game_state.current_skill.self_damages.exhaustion))
+        game_state.debt = math.max(0, game_state.debt + rnd_in_range(game_state.current_skill.self_damages.debt))
+        game_state.unhappiness = math.max(0, game_state.unhappiness + rnd_in_range(game_state.current_skill.self_damages.unhappiness))
+        game_state.wrath = math.max(0, game_state.wrath + rnd_in_range(game_state.current_skill.self_damages.wrath))
+        broker_send("player_health_update", {sender="player_turn_phase", body={state=game_state}})
     end
 end
 
@@ -21,7 +26,24 @@ end
 
 function update_player_turn_phase(dt)
     update_pression(dt)
-    -- update_health()
+
+    if pression == 0 then
+        if game_state.pression_timeout == nil then
+            game_state.pression_timeout = configuration.pression_penalty.timeout
+        end
+        game_state.pression_timeout = math.max(0, game_state.pression_timeout - dt)
+        if game_state.pression_timeout == 0 then
+            game_state.pression_timeout = configuration.pression_penalty.timeout
+            game_state.stress = math.max(0, game_state.stress + rnd_in_range(game_state.pression_penalty.stress))
+            game_state.exhaustion = math.max(0, game_state.exhaustion + rnd_in_range(game_state.pression_penalty.exhaustion))
+            game_state.debt = math.max(0, game_state.debt + rnd_in_range(game_state.pression_penalty.debt))
+            game_state.unhappiness = math.max(0, game_state.unhappiness + rnd_in_range(game_state.pression_penalty.unhappiness))
+            game_state.wrath = math.max(0, game_state.wrath + rnd_in_range(game_state.pression_penalty.wrath))
+            broker_send("player_health_update", {sender="player_turn_phase", body={state=game_state}})
+        end
+
+    end
+
     if game_state.selected and game_state.selected.type == "SKILL" then
         init_attack_phase()
         return

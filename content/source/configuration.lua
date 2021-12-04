@@ -1,7 +1,7 @@
 configuration = {
     max=100,
     min=-100,
-    initial_pression=20,
+    initial_pression=5,
     initial_stress=0,
     initial_exhaustion=0,
     initial_debt=0,
@@ -112,11 +112,11 @@ configuration = {
     },
     pression_penalty= {
         timeout=1, -- seconds
-        stress={from=-10, to=0},
-        exhaustion={from=0, to=0},
-        debt={from=-5, to=-5},
-        unhappiness={from=-10, to=-10},
-        wrath={from=0, to=0},
+        stress={from=0, to=2},
+        exhaustion={from=0, to=3},
+        debt={from=0, to=3},
+        unhappiness={from=0, to=10},
+        wrath={from=0, to=5},
     },
     fight_phase_timeouts={
         ATTACK_PHASE=2, 
