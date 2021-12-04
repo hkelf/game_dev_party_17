@@ -100,7 +100,7 @@ function ux_button_update(button, mx, my)
 
 	else
 
-		if button.state ~= STATE_HOVERED then
+		if button.state ~= STATE_NORMAL then
 
 			button.state = STATE_NORMAL
 

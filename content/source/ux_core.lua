@@ -21,9 +21,11 @@ local flee_button = nil
 
 local pos = { x = 0, y = 0 }
 
-local safe = { x = 0, y = 0, w = 1920, h = 1080 }
+local safe = { x = 0, y = 0, w = UX_WIDTH, h = UX_HEIGHT }
 
 local scale = { x = 1, y = 1 }
+
+local size = { w = UX_WIDTH, height = UX_HEIGHT }
 
 local skin = nil
 
@@ -49,9 +51,9 @@ function ux_core_draw()
 
 	love.graphics.clear(0.45, 0.45, 0.45)
 
-	ux_hero_draw(safe.x + 450, safe.h - 300)
+	ux_hero_draw(safe.w * 0.25, safe.h * 0.75)
 
-	ux_button_draw(flee_button, safe.w * 0.25, safe.h - 100)
+	ux_button_draw(flee_button, safe.w * 0.25, safe.h * 0.9)
 
 	love.graphics.setCanvas()
 
@@ -93,9 +95,9 @@ function ux_core_resize(width, height)
 
 	pos.y = (height - UX_HEIGHT * scale.y) * 0.5
 
-	safe.x = -pos.x * scale.x
+	safe.x = -pos.x * unscale.x
 
-	safe.y = -pos.y * scale.y
+	safe.y = -pos.y * unscale.y
 
 	safe.w = UX_WIDTH - safe.x * 2
 
@@ -109,9 +111,9 @@ function ux_core_update(dt)
 
 	local mx, my = love.mouse.getPosition()
 
-	mx = mx * unscale.x + safe.x
+	mx = (mx - pos.x) * unscale.x
 
-	my = my * unscale.y + safe.y
+	my = (my - pos.y) * unscale.y
 
 	ux_hero_update(dt)
 
