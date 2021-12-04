@@ -1,8 +1,6 @@
 
 require('source/anim')
 
-require('source/sprite')
-
 --
 
 local aura = nil

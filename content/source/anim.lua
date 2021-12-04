@@ -76,6 +76,16 @@ end
 
 --
 
+function anim_static(anim, name)
+
+	anim_play(anim, name, 'once')
+
+	anim_update(anim, 999)
+
+end
+
+--
+
 function anim_update(anim, dt)
 
 	if not anim.playing then return end
