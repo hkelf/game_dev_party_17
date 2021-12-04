@@ -3,13 +3,13 @@ require('source/list')
 
 --
 
-local events = {}
+local events = { }
 
 --
 
 function broker_register(name)
 
-	events[name] = events[name] or {}
+	events[name] = events[name] or { }
 
 	return events[name]
 
