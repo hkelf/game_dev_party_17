@@ -1,7 +1,7 @@
 require("source/configuration")
 require("source/utils")
 require("source/init_state")
-require("source/fight")
+require("source/fight_scene")
 require("source/fight_phase/player_death_fight_phase")
 
 game_state = {

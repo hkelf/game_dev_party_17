@@ -12,9 +12,12 @@ local resolve_self_damages = function()
     broker_send("ennemy_health_update", {sender="attack_phase", body={health=game_state.current_ennemy.health}})
 end
 
-local resolve_buff = function() 
-    game_state.current_ennemy.health = math.max(0, game_state.current_ennemy.health - rnd_in_range(game_state.current_skill.damages))
-    broker_send("ennemy_health_update", {sender="attack_phase", body={health=game_state.current_ennemy.health}})
+local resolve_buff = function()
+    if game_state.current_skill.buff then
+        local buff = find_by_id(game_state.current_skill.buff, configuration.buff)
+        game_state.buff = table.clone(buff)
+        broker_send("buff_added", {sender="attack_phase", body={buff=buff}})
+    end
 end
 
 -- 
@@ -22,6 +25,7 @@ end
 function init_attack_phase()
     game_state.scene.phase="ATTACK_PHASE"
     game_state.scene.timeout=configuration.fight_phase_timeouts.ATTACK_PHASE
+    -- game_state.
     local skill = find_by_id(game_state.selected.id, configuration.skills)
     game_state.current_skill = skill
     print("SKILL SELECTED :")
@@ -32,9 +36,8 @@ end
 function update_attack_phase(dt)
     game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
     if game_state.scene.timeout == 0 then
-        print("coucou")
         resolve_damages()
-        resolve_buff()
+        -- resolve_buff()
         resolve_self_damages()
         init_ennemy_attack_phase()
     end

@@ -1,7 +1,7 @@
 configuration = {
     max=100,
     min=-100,
-    initial_pression=0,
+    initial_pression=20,
     initial_stress=0,
     initial_exhaustion=0,
     initial_debt=0,
@@ -17,7 +17,7 @@ configuration = {
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
             wrath={from=0, to=10},
-            pression={from=0, to=5},
+            pression={from=0, to=1},
             health=150,
             drops={
                 "psychologist"
@@ -32,7 +32,7 @@ configuration = {
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
             wrath={from=0, to=10},
-            pression={from=0, to=5},
+            pression={from=0, to=1},
             health=200,
             drops={
                 "psychologist"
@@ -47,7 +47,7 @@ configuration = {
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
             wrath={from=0, to=10},
-            pression={from=0, to=5},
+            pression={from=0, to=1},
             health=120,
             drops={
                 "psychologist"
@@ -68,9 +68,9 @@ configuration = {
     skills={
         {
             id="slash",
-            damages={from=0, to=30},
-            buff={"motivation"},
-            debuff={"bleed"},
+            damages={from=0, to=100},
+            buff="motivation",
+            debuff="bleed",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -111,7 +111,7 @@ configuration = {
         resistance={from=5, to=10}
     },
     pression_penalty= {
-        timeout=5, -- seconds
+        timeout=1, -- seconds
         stress={from=-10, to=0},
         exhaustion={from=0, to=0},
         debt={from=-5, to=-5},
