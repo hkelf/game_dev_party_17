@@ -64,4 +64,8 @@ function initialize_state()
     game_state.wrath=configuration.initial_wrath
     
     init_ennemy_pool(game_state)
+
+    broker.send("game_initialized", { sender="state" })
+
+    broker.send("player_created", { sender="state", x=200, y=300})
 end
