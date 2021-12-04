@@ -14,13 +14,21 @@ end
 
 function anim_draw(anim, x, y)
 
+	anim_draw_scaled(anim, x, y, 1)
+
+end
+
+--
+
+function anim_draw_scaled(anim, x, y, s)
+
 	if anim.image == nil then return end
 
 	local frame = anim.frames[anim.cursor]
 
 	local clip = anim_clip(anim.image, frame)
 
-	love.graphics.draw(anim.image, clip, x, y)
+	love.graphics.draw(anim.image, clip, x, y, 0, s, s)
 
 end
 

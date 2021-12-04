@@ -3,6 +3,8 @@ require('source/broker')
 
 require('source/sprite')
 
+require('source/ux_boss')
+
 require('source/ux_button')
 
 require('source/ux_hero')
@@ -102,6 +104,8 @@ function ux_core_draw()
 
 	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
+	ux_boss_draw(safe.w * 0.5, safe.h * 0.1)
+
 	ux_levels_draw(safe.w - 1451, safe.h - 223)
 
 	ux_core_draw_skillbar()
@@ -158,6 +162,8 @@ function ux_core_load()
 
 	ux_hero_load()
 
+	ux_boss_load()
+
 	ux_pressure_load(skin)
 
 	ux_levels_load(skin)
@@ -205,6 +211,8 @@ function ux_core_update(dt)
 	my = (my - pos.y) * unscale.y
 
 	ux_hero_update(dt)
+
+	ux_boss_update(dt)
 
 	if ux_button_update(flee_button, mx, my) then
 
