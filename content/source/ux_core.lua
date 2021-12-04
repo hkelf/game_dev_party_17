@@ -19,6 +19,8 @@ local buttons = {}
 
 local canvas = nil
 
+local corridor = nil
+
 local flee_button = nil
 
 local pos = { x = 0, y = 0 }
@@ -37,9 +39,9 @@ local unscale = { x = 1, y = 1 }
 
 function ux_core_create_flee_button()
 
-	local normal = { x = 210, y = 301, w = 128, h = 103 }
+	local normal = { x = 205, y = 420, w = 138, h = 111 }
 
-	local pressed = { x = 205, y = 420, w = 138, h = 111 }
+	local pressed = { x = 210, y = 301, w = 128, h = 103 }
 
 	flee_button = ux_button_new(skin, normal, pressed)
 
@@ -51,7 +53,7 @@ function ux_core_draw()
 
 	love.graphics.setCanvas(canvas)
 
-	love.graphics.clear(0.45, 0.45, 0.45)
+	love.graphics.draw(corridor, 0, 0)
 
 	ux_hero_draw(safe.w * 0.25, safe.h * 0.6)
 
@@ -82,6 +84,8 @@ function ux_core_load()
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
 
 	ux_core_resize(love.graphics.getWidth(), love.graphics.getHeight())
+
+	corridor = love.graphics.newImage('image/corridor.png')
 
 	skin = love.graphics.newImage('image/final_ui.png')
 

@@ -15,7 +15,19 @@ function ux_button_draw(button, x, y)
 
 	local frame = anim_frame(button.anim)
 
+	if button.state == STATE_HOVERED then
+
+		love.graphics.setColor(0.9, 0.9, 0.9)
+
+	end
+
 	anim_draw(button.anim, x - frame.w * 0.5, y - frame.h * 0.5)
+
+	if button.state == STATE_HOVERED then
+
+		love.graphics.setColor(1, 1, 1)
+
+	end
 
 	button.x, button.y = x, y
 

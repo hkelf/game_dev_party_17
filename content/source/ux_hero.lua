@@ -9,7 +9,7 @@ local anim_aura = nil
 
 local anim_hero = nil
 
-local has_aura = false
+local has_aura = true
 
 local shadow = nil
 
