@@ -32,6 +32,9 @@ function update_state(dt)
     if game_state.scene.type == "FIGHT" then 
         update_fight(dt)
     end
+    if game_state.scene.type == "CORRIDOR" then
+        update_corridor(dt)
+    end
 end
 
 broker_subscribe(

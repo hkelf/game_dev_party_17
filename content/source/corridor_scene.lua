@@ -1,3 +1,6 @@
+require("source/corridor_phase/corridor_item_selection_phase")
+require("source/corridor_phase/corridor_walk_phase")
+
 function init_corridor() 
     game_state.scene = {
         type="CORRIDOR"
@@ -10,9 +13,9 @@ function init_corridor()
 end
 
 function update_corridor(dt)
+    print(game_state.scene.phase)
     if game_state.scene.phase == "ITEM_SELECTION_PHASE" then
         update_item_selection_phase(dt)
-        check_player_health()
     elseif game_state.scene.phase == "WALK_PHASE" then
         update_walk_phase(dt)
     end
