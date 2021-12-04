@@ -1,4 +1,8 @@
 
+require('source/ux_hero')
+
+--
+
 local UX_HEIGHT = 1080
 
 local UX_WIDTH = 1920
@@ -7,13 +11,11 @@ local UX_WIDTH = 1920
 
 local canvas = nil
 
-local pos_x = 0
+local pos = { x = 0, y = 0 }
 
-local pos_y = 0
+local safe = { x = 0, y = 0, w = 1920, h = 1080 }
 
-local scale_x = 1
-
-local scale_y = 1
+local scale = { x = 1, y = 1 }
 
 --
 
@@ -23,11 +25,13 @@ function ux_core_draw()
 
 	love.graphics.clear(1, 1, 1)
 
+	ux_hero_draw(safe.x + 300, safe.h - 700)
+
 	-- ...
 
 	love.graphics.setCanvas()
 
-	love.graphics.draw(canvas, pos_x, pos_y, 0, scale_x, scale_y)
+	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
 
 end
 
@@ -39,28 +43,40 @@ function ux_core_load()
 
 	ux_core_resize(love.graphics.getWidth(), love.graphics.getHeight())
 
+	ux_hero_load()
+
 end
 
 --
 
 function ux_core_resize(width, height)
 
-	scale_x = width / UX_WIDTH
+	scale.x = width / UX_WIDTH
 
-	scale_y = height / UX_HEIGHT
+	scale.y = height / UX_HEIGHT
 
-	scale = math.max(scale_x, scale_y)
+	local max_scale = math.max(scale.x, scale.y)
 
-	scale_x, scale_y = scale, scale
+	scale.x, scale.y = max_scale, max_scale
 
-	pos_x = (width - UX_WIDTH * scale_x) * 0.5
+	pos.x = (width - UX_WIDTH * scale.x) * 0.5
 
-	pos_y = (height - UX_HEIGHT * scale_y) * 0.5
+	pos.y = (height - UX_HEIGHT * scale.y) * 0.5
+
+	safe.x = -pos.x * scale.x
+
+	safe.y = -pos.y * scale.y
+
+	safe.w = UX_WIDTH - safe.x * 2
+
+	safe.h = UX_HEIGHT - safe.y * 2
 
 end
 
 --
 
 function ux_core_update(dt)
+
+	ux_hero_update(dt)
 
 end
