@@ -59,7 +59,7 @@ function initialize_state()
 
     broker_send("game_initialized", { sender="state" })
 
-    broker_send("player_created", { sender="state", x=200, y=300})
+    broker_send("player_created", { sender="state", body= { x=200, y=300} })
 
     print("STATE INITIALIZED")
     print_table(game_state)

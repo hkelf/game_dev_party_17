@@ -15,7 +15,7 @@ local select_ennemy = function()
     print_table(game_state.current_ennemy)
     game_state.already_fought_ennemies[game_state.current_ennemy.id] = true
 
-    broker_send("ennemy_created", {sender="fight", payload=game_state.current_ennemy})
+    broker_send("ennemy_created", {sender="fight", body=game_state.current_ennemy})
 end
 
 function init_fight() 
@@ -29,8 +29,8 @@ function init_fight()
     print("FIGHT_STARTED\n")
     print_table(game_state)
     print("\n")
-    broker_send("fight_started", {sender="fight"})
-    broker_send("player_state")
+    broker_send("fight_started", { sender="fight" })
+    broker_send("player_state_updated", { sender="fight", body={ new_state= game_state.player_state.state } })
 end
 
 function update_fight()
