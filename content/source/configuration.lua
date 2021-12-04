@@ -39,7 +39,14 @@ configuration = {
             id="slash",
             damages={from=0, to=10},
             buff={"motivation"},
-            debuff={"bleed"}
+            debuff={"bleed"},
+            self_damages={
+                stress={from=-10, to=0},
+                exhaustion={from=0, to=0},
+                debt={from=-5, to=-5},
+                unhappiness={from=-10, to=-10},
+                wrath={from=0, to=0},
+            }
         }
     },
     buff={
