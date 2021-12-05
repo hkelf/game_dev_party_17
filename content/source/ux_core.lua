@@ -200,6 +200,32 @@ end
 
 --
 
+function ux_core_fight_phase(payload)
+
+	local phase = payload.body.phase
+
+	if phase == 'PLAYER_TURN_PHASE' then
+
+		ux_hero_fight()
+
+	elseif phase == 'ATTACK_PHASE' then
+
+		ux_hero_attack()
+
+	elseif phase == 'ENNEMY_ATTACK_PHASE' then
+
+		ux_hero_hit()
+
+	else
+
+		ux_hero_fight()
+
+	end
+
+end
+
+--
+
 function ux_core_load()
 
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
@@ -227,6 +253,8 @@ function ux_core_load()
 	broker_subscribe('corridor_phase', ux_core_corridor)
 
 	broker_subscribe('fight_started', ux_core_fight)
+
+	broker_subscribe('fight_phase', ux_core_fight_phase)
 
 end
 
@@ -305,7 +333,7 @@ function ux_core_update(dt)
 			end
 
 		end
-		
+
 	end
 
 end

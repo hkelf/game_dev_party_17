@@ -5,21 +5,35 @@ require('source/broker')
 
 --
 
-local STATE_STAND = 0x00
+local STATE_ATTACK = 0x00
 
-local STATE_WALK = 0x01
+local STATE_HIT = 0x01
+
+local STATE_STAND = 0x02
+
+local STATE_WALK = 0x03
 
 --
 
+local attack = nil
+
 local aura = nil
 
+local anim_attack = nil
+
 local anim_aura = nil
+
+local anim_hit = nil
 
 local anim_stand = nil
 
 local anim_walk = nil
 
 local has_aura = false
+
+local hit = nil
+
+local offset = 0
 
 local shadow = nil
 
@@ -44,6 +58,28 @@ function ux_hero_anim()
 		return anim_walk
 
 	end
+
+	if state == STATE_HIT then
+
+		return anim_hit
+
+	end
+
+	if state == STATE_ATTACK then
+
+		return anim_attack
+
+	end
+
+end
+
+--
+
+function ux_hero_attack()
+
+	state = STATE_ATTACK
+
+	offset = 10
 
 end
 
@@ -89,7 +125,7 @@ function ux_hero_draw_hero(x, y)
 
 	y = y - frame.h
 
-	anim_draw(anim, x, y)
+	anim_draw(anim, x + offset, y)
 
 end
 
@@ -99,7 +135,19 @@ function ux_hero_fight()
 
 	state = STATE_STAND
 
+	offset = 0
+
 	anim_play(anim_stand, 'base', 'loop')
+
+end
+
+--
+
+function ux_hero_hit()
+
+	state = STATE_HIT
+
+	offset = 0
 
 end
 
@@ -107,13 +155,30 @@ end
 
 function ux_hero_load()
 
+	attack = love.graphics.newImage('image/hero_attack.png')
+
 	aura = love.graphics.newImage('image/hero_aura.png')
+
+	hit = love.graphics.newImage('image/hero_hit.png')
 
 	shadow = love.graphics.newImage('image/hero_shadow.png')
 
 	stand = love.graphics.newImage('image/hero_stand.png')
 
 	walk = love.graphics.newImage('image/hero_walk.png')
+
+	anim_attack = anim_new({
+
+		base = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 0, y = 0, w = 324, h = 384, t = 0 }
+			}
+		}
+	})
 
 	anim_aura = anim_new({
 
@@ -129,6 +194,19 @@ function ux_hero_load()
 				{ x = 0, y = 510, w = 682, h = 510, t = 0.2 },
 				{ x = 682, y = 510, w = 682, h = 510, t = 0.25 },
 				{ x = 1364, y = 510, w = 682, h = 510, t = 0.2 }
+			}
+		}
+	})
+
+	anim_hit = anim_new({
+
+		base = {
+
+			image = hit,
+
+			frames = {
+
+				{ x = 0, y = 0, w = 358, h = 358, t = 0 }
 			}
 		}
 	})
@@ -173,6 +251,10 @@ function ux_hero_load()
 
 	anim_play(ux_hero_anim(), 'base', 'loop')
 
+	anim_static(anim_attack, 'base')
+
+	anim_static(anim_hit, 'base')
+
 end
 
 --
@@ -186,6 +268,12 @@ function ux_hero_update(dt)
 	end
 
 	anim_update(ux_hero_anim(), dt)
+
+	if state == STATE_HIT then
+
+		offset = offset - 20 * dt
+
+	end
 
 end
 
