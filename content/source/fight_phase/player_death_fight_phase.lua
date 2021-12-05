@@ -5,5 +5,8 @@ function init_player_death_fight_phase()
 end
 
 function update_player_death_fight_phase(dt)
-    print("LUL")
+    game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
+    if game_state.scene.timeout == 0 then
+        broker_send("game_over", {})
+    end
 end
