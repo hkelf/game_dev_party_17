@@ -30,7 +30,7 @@ function init_fight()
     print("FIGHT_STARTED\n")
     print_table(game_state)
     print("\n")
-    broker_send("fight_started", { sender="fight", ennemy=game_state.current_ennemy.id  })
+    broker_send("fight_started", { sender="fight", body={ennemy=game_state.current_ennemy.id}})
     init_player_turn_phase()
 end
 
