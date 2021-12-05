@@ -93,13 +93,11 @@ function debug_console()
         ) 
     end
     if game_state.selectable_items then
-        for _, e in ipairs(game_state.selectable_items) do
-            love.graphics.print(
-                "buff rounds : " .. game_state.buff.rounds .. "\n" ..
-                "buff name: " .. game_state.buff.id .. "\n"
-                , 300, 0
-            )
-        end 
+        love.graphics.print(
+            "item 1 " .. game_state.selectable_items[1] .. "\n" ..
+            "item 2 " .. game_state.selectable_items[2] .. "\n"
+            , 300, 0
+        )
     end
 
 end
