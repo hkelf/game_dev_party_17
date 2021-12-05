@@ -27,6 +27,37 @@ local UX_WIDTH = 1920
 
 --
 
+local ITEM_COORDS = {
+
+	SALARY = { x = 8, y = 16 },
+
+	NAP = { x = 149, y = 16 },
+
+	MEDITATION = { x = 291, y = 16 },
+
+	LAUGH = { x = 433, y = 16 },
+
+	EXERCISE = { x = 8, y = 157 },
+
+	VIDEO_GAME = { x = 149, y = 157 },
+
+	DRINKING = { x = 291, y = 157 },
+
+	SEXY_TIME = { x = 433, y = 157 },
+
+	DRUGS = { x = 10, y = 298 },
+
+	MEET_FRIENDS = { x = 150, y = 298 },
+
+	FOOD = { x = 292, y = 298 },
+
+	CHILLING = { x = 434, y = 298 },
+
+	MUSIC = { x = 10, y = 439 }
+}
+
+--
+
 local buttons = { }
 
 local canvas = nil
@@ -73,7 +104,7 @@ function ux_core_corridor(payload)
 
 		ux_boss_hide()
 
-		ux_core_create_item_buttons()
+		ux_core_create_item_buttons(payload.body.items)
 
 	elseif phase == 'WALK_PHASE' then
 
@@ -119,13 +150,17 @@ end
 
 --
 
-function ux_core_create_item_buttons()
+function ux_core_create_item_buttons(choice)
 
-	local left = { x = 8, y = 16, w = 125, h = 125 }
+	local lpos = ITEM_COORDS[choice[1]]
+
+	local left = { x = lpos.x, y = lpos.y, w = 125, h = 125 }
 
 	item_left = ux_button_new(items, left, left)
 
-	local right = { x = 149, y = 16, w = 125, h = 125 }
+	local rpos = ITEM_COORDS[choice[2]]
+
+	local right = { x = rpos.x, y = rpos.y, w = 125, h = 125 }
 
 	item_right = ux_button_new(items, right, right)
 
