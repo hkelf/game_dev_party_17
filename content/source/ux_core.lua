@@ -60,6 +60,8 @@ local ITEM_COORDS = {
 
 local buttons = { }
 
+local can_flee = true
+
 local canvas = nil
 
 local corridor_x = 0
@@ -223,7 +225,11 @@ end
 
 function ux_core_draw_buttons()
 
-	ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
+	if can_flee then
+
+		ux_button_draw(flee_button, safe.x + 150, safe.h - 120)
+
+	end
 
 	for _, button in ipairs(buttons) do
 
@@ -259,7 +265,9 @@ function ux_core_fight(payload)
 
 	ux_hero_fight()
 
-	ux_boss_fight(payload.body.ennemy)
+	ux_boss_fight(payload.body.ennemy.id)
+
+	can_flee = payload.body.ennemy.fleeable
 
 end
 
@@ -375,7 +383,7 @@ function ux_core_update(dt)
 
 	if state == STATE_FIGHT then
 
-		if ux_button_update(flee_button, mx, my) then
+		if can_flee and ux_button_update(flee_button, mx, my) then
 
 			broker_send('button_pressed', {
 
