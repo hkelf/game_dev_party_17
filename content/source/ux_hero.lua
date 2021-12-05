@@ -53,7 +53,7 @@ function ux_hero_corridor(payload)
 
 	state = STATE_WALK
 
-	anim_play(ux_hero_anim(), 'base', 'loop')
+	anim_play(anim_walk, 'base', 'loop')
 
 end
 
@@ -100,6 +100,16 @@ function ux_hero_draw_hero(x, y)
 	y = y - frame.h
 
 	anim_draw(anim, x, y)
+
+end
+
+--
+
+function ux_hero_fight(payload)
+
+	state = STATE_STAND
+
+	anim_play(anim_stand, 'base', 'loop')
 
 end
 
@@ -174,6 +184,8 @@ function ux_hero_load()
 	anim_play(ux_hero_anim(), 'base', 'loop')
 
 	broker_subscribe('corridor_phase', ux_hero_corridor)
+
+	broker_subscribe('fight_started', ux_hero_fight)
 
 end
 
