@@ -119,7 +119,7 @@ function ux_hero_draw(x, y)
 
 	love.graphics.draw(shadow, x - 90, y - 40)
 
-	if has_aura then
+	if has_aura and state == STATE_STAND then
 
 		ux_hero_draw_aura(x, y)
 
