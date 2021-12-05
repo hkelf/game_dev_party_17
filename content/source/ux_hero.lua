@@ -183,11 +183,15 @@ end
 
 function ux_hero_hit()
 
-	state = STATE_HIT
+	if state ~= STATE_HIT then
 
-	offset = 0
+		state = STATE_HIT
 
-	show_kameha = false
+		offset = 0
+
+		show_kameha = false
+
+	end
 
 end
 
