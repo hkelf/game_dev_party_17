@@ -6,7 +6,6 @@ function init_corridor(boss_loot)
         type="CORRIDOR"
     }
     print("corridor started\n")
-    print_table(game_state)
     print("\n")
     broker_send("corridor_started", { sender="corridor_scene" })
     init_item_selection_phase(boss_loot)

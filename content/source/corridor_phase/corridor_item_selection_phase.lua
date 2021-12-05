@@ -2,8 +2,6 @@ local resolve_item = function()
     print("----")
     print(game_state.selected.index)
     print("----")
-    print_table(game_state.selectable_items)
-    print("----")
     local id = game_state.selectable_items[game_state.selected.index]
     local item = find_by_id(id, configuration.items)
     game_state.stress = math.max(0, math.min(configuration.max, game_state.stress + rnd_in_range(item.stress)))
