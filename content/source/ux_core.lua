@@ -15,6 +15,10 @@ require('source/ux_pressure')
 
 --
 
+local STATE_CORRIDOR = 0x00
+
+local STATE_FIGHT = 0x01
+
 local UX_HEIGHT = 1080
 
 local UX_WIDTH = 1920
@@ -41,7 +45,21 @@ local skills = nil
 
 local skin = nil
 
+local state = STATE_FIGHT
+
 local unscale = { x = 1, y = 1 }
+
+--
+
+function ux_core_corridor(payload)
+
+	state = STATE_CORRIDOR
+
+	ux_hero_corridor()
+
+	ux_boss_hide()
+
+end
 
 --
 
@@ -146,6 +164,18 @@ end
 
 --
 
+function ux_core_fight(payload)
+
+	state = STATE_FIGHT
+
+	ux_hero_fight()
+
+	ux_boss_fight(payload.body.ennemy)
+
+end
+
+--
+
 function ux_core_load()
 
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
@@ -169,6 +199,10 @@ function ux_core_load()
 	ux_levels_load(skin)
 
 	ux_core_create_buttons()
+
+	broker_subscribe('corridor_phase', ux_core_corridor)
+
+	broker_subscribe('fight_started', ux_core_fight)
 
 end
 
