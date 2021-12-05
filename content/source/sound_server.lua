@@ -22,6 +22,9 @@ function try_to_play(sound)
     end
 end
 
+main:setLooping(true)
+love.audio.play(main)
+
 broker_subscribe("button_pressed", 
     function(payload)
         if payload.body.type == "ITEM" and not click:isPlaying( ) then
