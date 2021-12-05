@@ -57,7 +57,12 @@ function update_attack_phase(dt)
         resolve_damages()
         resolve_self_damages()
         resolve_buff()
-        if game_state.current_ennemy.health <= 0 then
+        if game_state.stress == configuration.max 
+            or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
+            or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
+        then
+            init_player_death_fight_phase()
+        elseif game_state.current_ennemy.health <= 0 then
             print("LETZGO")
             init_ennemy_death_phase()
         else 

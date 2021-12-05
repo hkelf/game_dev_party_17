@@ -10,9 +10,9 @@ configuration = {
     number_of_ennemies=1,
     ennemies={
         {
-            id="test",
+            id="breakup",
             image="dummy.png",
-            stress={from=0, to=10},
+            stress={from=100, to=100},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -25,9 +25,9 @@ configuration = {
             fleeable=true
         },
         {
-            id="test2",
+            id="finance",
             image="dummy.png",
-            stress={from=0, to=10},
+            stress={from=100, to=100},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -40,9 +40,9 @@ configuration = {
             fleeable=true
         },
         {
-            id="test3",
+            id="mourn",
             image="dummy.png",
-            stress={from=0, to=10},
+            stress={from=100, to=100},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -53,7 +53,37 @@ configuration = {
                 "psychologist"
             },
             fleeable=true
-        }    
+        },    
+        {
+            id="neighbour",
+            image="dummy.png",
+            stress={from=100, to=100},
+            exhaustion={from=0, to=10},
+            debt={from=0, to=10},
+            unhappiness={from=0, to=10},
+            wrath={from=0, to=10},
+            pression={from=0, to=1},
+            health=120,
+            drops={
+                "psychologist"
+            },
+            fleeable=true
+        },
+        {
+            id="work",
+            image="dummy.png",
+            stress={from=100, to=100},
+            exhaustion={from=0, to=10},
+            debt={from=0, to=10},
+            unhappiness={from=0, to=10},
+            wrath={from=0, to=10},
+            pression={from=0, to=1},
+            health=120,
+            drops={
+                "psychologist"
+            },
+            fleeable=true
+        },
     },
     items={
         {
@@ -70,7 +100,7 @@ configuration = {
             id="ATTACK",
             damages={from=0, to=100},
             self_damages={
-                stress={from=10, to=0},
+                stress={from=0, to=0},
                 exhaustion={from=0, to=0},
                 debt={from=5, to=5},
                 unhappiness={from=10, to=10},

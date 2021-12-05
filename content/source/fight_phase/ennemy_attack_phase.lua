@@ -23,6 +23,13 @@ function update_ennemy_attack_phase(dt)
     game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
     if game_state.scene.timeout == 0 then
         resolve_damages()
-        init_player_turn_phase()
+        if game_state.stress == configuration.max 
+            or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
+            or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
+        then
+            init_player_death_fight_phase()
+        else
+            init_player_turn_phase()
+        end
     end
 end
