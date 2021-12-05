@@ -153,7 +153,7 @@ end
 --
 
 function ux_core_create_item_buttons(choice)
-
+	print_table(choice)
 	local lpos = ITEM_COORDS[choice[1]]
 
 	local left = { x = lpos.x, y = lpos.y, w = 125, h = 125 }

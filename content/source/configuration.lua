@@ -20,7 +20,7 @@ configuration = {
             pression={from=0, to=1},
             health=75,
             drops={
-                "FOOD", "MEDIATION"
+                "FOOD", "MEDITATION"
             },
             fleeable=true
         },
@@ -50,7 +50,7 @@ configuration = {
             pression={from=0, to=1},
             health=75,
             drops={
-                "MEDIATION", "EXERCISE"
+                "MEDITATION", "EXERCISE"
             },
             fleeable=true
         },    
@@ -143,7 +143,7 @@ configuration = {
             exhaustion={from=-25, to=-25},
             debt={from=0, to=0},
             unhappiness={from=-25, to=-25},
-            wrath={from=, to=0},
+            wrath={from=0, to=0},
         },
         {
             id="VIDEO_GAME",
