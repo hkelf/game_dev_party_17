@@ -9,6 +9,8 @@ require('source/sprite')
 
 local anim = nil
 
+local hit = 999
+
 local hpscale = 0
 
 local images = { }
@@ -19,11 +21,35 @@ local visible = false
 
 --
 
+function ux_boss_attack(attack)
+
+	if attack then
+
+		anim_play(anim, 'fast', 'loop')
+
+	else
+
+		anim_play(anim, 'base', 'loop')
+
+	end
+
+end
+
+--
+
 function ux_boss_draw(x, y)
 
 	if visible then
 
+		if hit < 10 and math.fmod(math.floor(hit), 2) == 0 then
+
+			love.graphics.setColor(0.2, 0.2, 0.2)
+
+		end
+
 		anim_draw_scaled(anim, x, y, 0.65, 0.65)
+
+		love.graphics.setColor(1, 1, 1)
 
 		local empty = sprite_clip(skin, 622, 282, 374, 57)
 
@@ -44,6 +70,8 @@ end
 function ux_boss_fight(enemy)
 
 	anim_reskin(anim, 'base', images[enemy])
+
+	anim_reskin(anim, 'fast', images[enemy])
 
 	anim_play(anim, 'base', 'loop')
 
@@ -70,6 +98,8 @@ function ux_boss_hit(payload)
 	local max = payload.body.initial_health
 
 	hpscale = 1 - (health / max)
+
+	hit = 0
 
 end
 
@@ -100,6 +130,17 @@ function ux_boss_load(ui_skin)
 				{ x = 0, y = 0, w = 960, h = 1080, t = 0.5 },
 				{ x = 960, y = 0, w = 960, h = 1080, t = 0.5 }
 			}
+		},
+
+		fast = {
+
+			image = images.work,
+
+			frames = {
+
+				{ x = 0, y = 0, w = 960, h = 1080, t = 0.2 },
+				{ x = 960, y = 0, w = 960, h = 1080, t = 0.2 }
+			}
 		}
 	})
 
@@ -116,6 +157,12 @@ function ux_boss_update(dt)
 	if visible then
 
 		anim_update(anim, dt)
+
+	end
+
+	if hit < 10 then
+
+		hit = hit + 10 * dt
 
 	end
 

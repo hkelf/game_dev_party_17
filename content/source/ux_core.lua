@@ -232,6 +232,8 @@ function ux_core_draw()
 
 	local alpha = fade_alpha * fade_alpha * fade_alpha * fade_alpha
 
+	if alpha > 0.95 then alpha = 1 end
+
 	love.graphics.setColor(fade_color, fade_color, fade_color, alpha)
 
 	love.graphics.rectangle('fill', 0, 0, UX_WIDTH, UX_HEIGHT)
@@ -328,6 +330,8 @@ function ux_core_fight_phase(payload)
 
 		ux_hero_hit()
 
+		ux_core_fade(FADE_LIGHT, 1, -2)
+
 	elseif phase == 'ENNEMY_DEATH_PHASE' then
 
 		ux_core_fade(FADE_LIGHT, 0, 0.5)
@@ -345,6 +349,8 @@ function ux_core_fight_phase(payload)
 		ux_hero_fight()
 
 	end
+
+	ux_boss_attack(phase == 'ENNEMY_ATTACK_PHASE')
 
 end
 

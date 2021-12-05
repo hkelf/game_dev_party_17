@@ -299,7 +299,7 @@ configuration = {
         ATTACK_PHASE=1, 
         ENNEMY_ATTACK_PHASE=1,
         ENNEMY_DEATH_PHASE=2,
-        PLAYER_FLEE_PHASE=1,
+        PLAYER_FLEE_PHASE=2,
         PLAYER_DEATH_FIGHT_PHASE=5,
         STARTUP_PHASE=3
     },
