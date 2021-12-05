@@ -44,7 +44,9 @@ broker_subscribe(
             game_state.selected = {type="FLEE"}
         elseif payload.body.type == "ITEM" then
             game_state.selected = payload.body
+            print("")
             print_table(game_state.selected)
+            print("")
         else
             game_state.selected = {type="SKILL", id=payload.body.type}
         end

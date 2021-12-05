@@ -7,6 +7,6 @@ end
 function update_player_death_corridor_phase(dt)
     game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
     if game_state.scene.timeout == 0 then
-        init_fight()
+        print("LUL")
     end
 end

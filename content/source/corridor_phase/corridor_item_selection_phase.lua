@@ -6,11 +6,11 @@ local resolve_item = function()
     print("----")
     local id = game_state.selectable_items[game_state.selected.index]
     local item = find_by_id(id, configuration.items)
-    game_state.stress = math.min(configuration.max, game_state.stress + rnd_in_range(item.stress))
-    game_state.exhaustion = math.min(configuration.max, game_state.exhaustion + rnd_in_range(item.exhaustion))
-    game_state.debt = math.min(configuration.max, game_state.debt + rnd_in_range(item.debt))
-    game_state.unhappiness = math.min(configuration.max, game_state.unhappiness + rnd_in_range(item.unhappiness))
-    game_state.wrath = math.min(configuration.max, game_state.wrath + rnd_in_range(item.wrath))
+    game_state.stress = math.max(0, math.min(configuration.max, game_state.stress + rnd_in_range(item.stress)))
+    game_state.exhaustion = math.max(0, math.min(configuration.max, game_state.exhaustion + rnd_in_range(item.exhaustion)))
+    game_state.debt = math.max(0, math.min(configuration.max, game_state.debt + rnd_in_range(item.debt)))
+    game_state.unhappiness = math.max(0, math.min(configuration.max, game_state.unhappiness + rnd_in_range(item.unhappiness)))
+    game_state.wrath = math.max(0, math.min(configuration.max, game_state.wrath + rnd_in_range(item.wrath)))
     broker_send("player_health_update", {sender="attack_phase", body={state=game_state}})
 end
 

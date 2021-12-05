@@ -13,11 +13,11 @@ local resolve_damages = function()
 end
 
 local resolve_self_damages = function() 
-    game_state.stress = math.min(configuration.max, game_state.stress + rnd_in_range(game_state.current_skill.self_damages.stress))
-    game_state.exhaustion = math.min(configuration.max, game_state.exhaustion + rnd_in_range(game_state.current_skill.self_damages.exhaustion))
-    game_state.debt = math.min(configuration.max, game_state.debt + rnd_in_range(game_state.current_skill.self_damages.debt))
-    game_state.unhappiness = math.min(configuration.max, game_state.unhappiness + rnd_in_range(game_state.current_skill.self_damages.unhappiness))
-    game_state.wrath = math.min(configuration.max, game_state.wrath + rnd_in_range(game_state.current_skill.self_damages.wrath))
+    game_state.stress = math.max(0, math.min(configuration.max, game_state.stress + rnd_in_range(game_state.current_skill.self_damages.stress)))
+    game_state.exhaustion = math.max(0, math.min(configuration.max, game_state.exhaustion + rnd_in_range(game_state.current_skill.self_damages.exhaustion)))
+    game_state.debt = math.max(0, math.min(configuration.max, game_state.debt + rnd_in_range(game_state.current_skill.self_damages.debt)))
+    game_state.unhappiness = math.max(0, math.min(configuration.max, game_state.unhappiness + rnd_in_range(game_state.current_skill.self_damages.unhappiness)))
+    game_state.wrath = math.max(0, math.min(configuration.max, game_state.wrath + rnd_in_range(game_state.current_skill.self_damages.wrath)))
     broker_send("player_health_update", {sender="attack_phase", body={state=game_state}})
 end
 

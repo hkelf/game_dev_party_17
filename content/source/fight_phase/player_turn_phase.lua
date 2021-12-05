@@ -47,8 +47,10 @@ function update_player_turn_phase(dt)
 
     if game_state.selected and game_state.selected.type == "SKILL" then
         init_attack_phase()
-        return
-    elseif game_state.selected and game_state.selected.type == "FLEE" then
+    elseif game_state.selected and game_state.selected.type == "FLEE" and game_state.current_ennemy.fleeable == true then
         init_player_flee_phase()
+        game_state.current_ennemy.fleeable = false
+        table.insert(game_state.ennemy_pool, game_state.current_ennemy)
+        game_state.current_ennemy = nil
     end
 end

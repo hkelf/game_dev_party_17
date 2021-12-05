@@ -12,7 +12,6 @@ end
 
 function love.load()
     initialize_state()
-    print_table(game_state)
     ux_core_load()
 end
 
@@ -73,11 +72,17 @@ function debug_console()
         "scene : " .. game_state.scene.type .. "\n"
     )
     if game_state.scene.type == 'FIGHT' then 
+
         love.graphics.print( 
-            "current ennemy hp : " .. game_state.current_ennemy.health .. "\n" ..
             "fight phase : " .. game_state.scene.phase .. "\n"
             , 0, 100
         )
+        if game_state.current_ennemy then
+            love.graphics.print( 
+                "current ennemy hp : " .. game_state.current_ennemy.health .. "\n"
+                , 0, 125
+            )
+        end
         if game_state.scene.timeout then
             love.graphics.print( 
                 "fight phase timeout : " .. game_state.scene.timeout .. "\n"

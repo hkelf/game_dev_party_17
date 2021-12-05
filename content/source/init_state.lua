@@ -18,8 +18,7 @@ end
 
 
 local init_ennemy_pool = function(game_state)
-    game_state.ennemy_pool = {}
-    local selected_ennemy = {}
+   -- local selected_ennemy = {}
     
     local pool_size
     
@@ -29,6 +28,24 @@ local init_ennemy_pool = function(game_state)
         pool_size = configuration.number_of_ennemies 
     end
 
+    game_state.ennemy_pool = table.clone(configuration.ennemies)
+
+    while not #game_state.ennemy_pool == pool_size do
+        table.remove(1, game_state.ennemy_pool)
+    end
+
+    print("===")
+    print("===")
+    print("===")
+    print("===")
+    print("===")
+    print("ENNEMY POOL")
+    print_table(game_state.ennemy_pool)
+    print("===")
+    print("===")
+    print("===")
+    print("===")
+--[[
     for i = 1, pool_size do
         local to_be_selected = math.random(pool_size)
         print(selected_ennemy[to_be_selected], to_be_selected)
@@ -42,6 +59,7 @@ local init_ennemy_pool = function(game_state)
         
         table.insert(game_state.ennemy_pool, configuration.ennemies[to_be_selected])
     end
+]]
 end
 
 function initialize_state() 
@@ -53,6 +71,7 @@ function initialize_state()
     game_state.wrath=configuration.initial_wrath
     game_state.scene={}
     game_state.selected={}
+    game_state.already_fought_ennemies={}
         
     init_ennemy_pool(game_state)
 

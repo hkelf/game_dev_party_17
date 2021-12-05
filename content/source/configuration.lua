@@ -197,12 +197,12 @@ configuration = {
     skills={
         {
             id="ATTACK",
-            damages={from=0, to=100},
+            damages={from=1000, to=1000},
             self_damages={
                 stress={from=0, to=0},
                 exhaustion={from=0, to=0},
-                debt={from=5, to=5},
-                unhappiness={from=10, to=10},
+                debt={from=0, to=0},
+                unhappiness={from=0, to=0},
                 wrath={from=0, to=0},
             }
         },

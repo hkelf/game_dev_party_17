@@ -7,18 +7,23 @@ require("source/fight_phase/player_flee_phase")
 require("source/fight_phase/ennemy_death_phase")
 
 local select_ennemy = function() 
+    --[[
     local rnd = math.random(#game_state.ennemy_pool)
     print(game_state.ennemy_pool[rnd].id)
     game_state.current_ennemy = table.clone(game_state.ennemy_pool[rnd])
     print(game_state.current_ennemy)
-    if not game_state.already_fought_ennemies 
-    then 
-        game_state.already_fought_ennemies = {} 
+    ]]
+    
+    shuffle(game_state.ennemy_pool)
+
+    game_state.current_ennemy = table.remove(game_state.ennemy_pool, 1)
+    if not game_state.current_ennemy.initial_health then  
+        game_state.current_ennemy.initial_health = game_state.current_ennemy.health
     end
-    game_state.current_ennemy.initial_health = game_state.current_ennemy.health
+
     print("SELECTED ENNEMY:")
     print_table(game_state.current_ennemy)
-    game_state.already_fought_ennemies[game_state.current_ennemy.id] = true
+    print("\n")
 
     broker_send("ennemy_created", {sender="fight", body=game_state.current_ennemy})
 end
@@ -31,7 +36,7 @@ function init_fight()
     print("FIGHT_STARTED\n")
     print_table(game_state)
     print("\n")
-    broker_send("fight_started", { sender="fight", body={ennemy=game_state.current_ennemy.id}})
+    broker_send("fight_started", { sender="fight", body={ennemy=game_state.current_ennemy}})
     init_player_turn_phase()
 end
 
