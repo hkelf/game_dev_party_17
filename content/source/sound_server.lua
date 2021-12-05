@@ -17,6 +17,7 @@ local walk = love.audio.newSource("sound/walk.wav", "static")
 
 function try_to_play(sound)
     if not sound:isPlaying( ) then
+        sound:setLooping(false)
         love.audio.play(sound)
     end
 end
@@ -48,9 +49,13 @@ broker_subscribe("fight_phase",
                 try_to_play(life_steal)
             end
         elseif payload.body.phase == "ENNEMY_ATTACK_PHASE" then
+            try_to_play(ennemy_attack)
         elseif payload.body.phase == "ENNEMY_DEATH_PHASE" then
+            try_to_play(monster_death)
         elseif payload.body.phase == "PLAYER_DEATH_FIGHT_PHASE" then
+            try_to_play(defeat)
         elseif payload.body.phase == "PLAYER_FLEE_PHASE" then
+            try_to_play(flee)
         end
     end
 )

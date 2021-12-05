@@ -15,17 +15,7 @@ local init_player_death_fight_phase = function()
     end
 end
 
-local check_player_state = function()
-    if game_state.stress == configuration.max 
-        or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
-        or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
-    then
-        init_player_death_fight_phase()
-    end
-end
-
 function update_state(dt) 
-    check_player_state()
     if not game_state.scene.type then
         init_fight()
     end

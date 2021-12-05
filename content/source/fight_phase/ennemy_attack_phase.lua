@@ -5,11 +5,11 @@ local resolve_damages = function()
         coef = (100 + game_state.buff.damage_boost) / 100
     end
 
-    game_state.stress = math.floor(math.max(0, game_state.stress + rnd_in_range(game_state.current_ennemy.stress)))
-    game_state.exhaustion = math.floor(math.max(0, game_state.exhaustion + rnd_in_range(game_state.current_ennemy.exhaustion)))
-    game_state.debt = math.floor(math.max(0, game_state.debt + rnd_in_range(game_state.current_ennemy.debt)))
-    game_state.unhappiness = math.floor(math.max(0, game_state.unhappiness + rnd_in_range(game_state.current_ennemy.unhappiness)))
-    game_state.wrath = math.floor(math.max(0, game_state.wrath + rnd_in_range(game_state.current_ennemy.wrath)))
+    game_state.stress = math.floor(math.min(configuration.max, game_state.stress + rnd_in_range(game_state.current_ennemy.stress)))
+    game_state.exhaustion = math.floor(math.min(configuration.max, game_state.exhaustion + rnd_in_range(game_state.current_ennemy.exhaustion)))
+    game_state.debt = math.floor(math.min(configuration.max, game_state.debt + rnd_in_range(game_state.current_ennemy.debt)))
+    game_state.unhappiness = math.floor(math.min(configuration.max, game_state.unhappiness + rnd_in_range(game_state.current_ennemy.unhappiness)))
+    game_state.wrath = math.floor(math.min(configuration.max, game_state.wrath + rnd_in_range(game_state.current_ennemy.wrath)))
     broker_send("player_health_update", {sender="ennemy_attack_phase", body={state=game_state}})
 end
 
