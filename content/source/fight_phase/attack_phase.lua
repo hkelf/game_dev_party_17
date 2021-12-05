@@ -2,7 +2,7 @@ local resolve_damages = function()
     local coef = 1
 
     if game_state.buff then
-        coef = (100 - game_state.buff.resistance) / 100
+        coef = (100 + game_state.buff.damage_boost) / 100
     end
 
     game_state.current_ennemy.health = math.floor(math.max(
