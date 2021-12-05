@@ -57,7 +57,12 @@ function update_attack_phase(dt)
         resolve_damages()
         resolve_self_damages()
         resolve_buff()
-        init_ennemy_attack_phase()
+        if game_state.current_ennemy.health <= 0 then
+            print("LETZGO")
+            init_ennemy_death_phase()
+        else 
+            init_ennemy_attack_phase()
+        end
         game_state.current_skill = nil
     end
 end

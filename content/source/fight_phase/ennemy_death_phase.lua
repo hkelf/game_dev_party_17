@@ -1,9 +1,3 @@
-function check_ennemy_state()
-    if game_state.current_ennemy.health <= 0 then
-        init_ennemy_death_phase()
-    end 
-end
-
 function init_ennemy_death_phase()
     game_state.scene.phase="ENNEMY_DEATH_PHASE"
     game_state.scene.timeout=configuration.fight_phase_timeouts.ENNEMY_DEATH_PHASE

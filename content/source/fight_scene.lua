@@ -39,7 +39,6 @@ function update_fight(dt)
         update_player_turn_phase(dt)
     elseif game_state.scene.phase == "ATTACK_PHASE" then
         update_attack_phase(dt)
-        check_ennemy_state()
     elseif game_state.scene.phase == "ENNEMY_ATTACK_PHASE" then
         update_ennemy_attack_phase(dt)
     elseif game_state.scene.phase == "PLAYER_FLEE_PHASE" then
