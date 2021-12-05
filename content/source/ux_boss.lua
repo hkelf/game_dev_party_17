@@ -41,13 +41,23 @@ end
 
 --
 
-function ux_boss_fight(payload)
+function ux_boss_fight(enemy)
 
-	anim_reskin(anim, 'base', images[payload.body.ennemy])
+	anim_reskin(anim, 'base', images[enemy])
 
 	anim_play(anim, 'base', 'loop')
 
+	hpscale = 0
+
 	visible = true
+
+end
+
+--
+
+function ux_boss_hide()
+
+	visible = false
 
 end
 
@@ -94,8 +104,6 @@ function ux_boss_load(ui_skin)
 	})
 
 	anim_play(anim, 'base', 'loop')
-
-	broker_subscribe('fight_started', ux_boss_fight)
 
 	broker_subscribe('ennemy_health_update', ux_boss_hit)
 

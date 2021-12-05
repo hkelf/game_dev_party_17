@@ -49,16 +49,6 @@ end
 
 --
 
-function ux_hero_corridor(payload)
-
-	state = STATE_WALK
-
-	anim_play(anim_walk, 'base', 'loop')
-
-end
-
---
-
 function ux_hero_draw(x, y)
 
 	love.graphics.draw(shadow, x - 90, y - 40)
@@ -105,7 +95,7 @@ end
 
 --
 
-function ux_hero_fight(payload)
+function ux_hero_fight()
 
 	state = STATE_STAND
 
@@ -183,10 +173,6 @@ function ux_hero_load()
 
 	anim_play(ux_hero_anim(), 'base', 'loop')
 
-	broker_subscribe('corridor_phase', ux_hero_corridor)
-
-	broker_subscribe('fight_started', ux_hero_fight)
-
 end
 
 --
@@ -200,5 +186,15 @@ function ux_hero_update(dt)
 	end
 
 	anim_update(ux_hero_anim(), dt)
+
+end
+
+--
+
+function ux_hero_walk()
+
+	state = STATE_WALK
+
+	anim_play(anim_walk, 'base', 'loop')
 
 end

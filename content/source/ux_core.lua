@@ -15,6 +15,12 @@ require('source/ux_pressure')
 
 --
 
+local STATE_FIGHT = 0x00
+
+local STATE_ITEMSEL = 0x01
+
+local STATE_WALK = 0x02
+
 local UX_HEIGHT = 1080
 
 local UX_WIDTH = 1920
@@ -24,6 +30,8 @@ local UX_WIDTH = 1920
 local buttons = { }
 
 local canvas = nil
+
+local corridor_x = 0
 
 local flee_button = nil
 
@@ -41,7 +49,33 @@ local skills = nil
 
 local skin = nil
 
+local state = STATE_FIGHT
+
 local unscale = { x = 1, y = 1 }
+
+--
+
+function ux_core_corridor(payload)
+
+	local phase = payload.body.phase
+
+	if phase == 'ITEM_SELECTION_PHASE' then
+
+		state = STATE_ITEMSEL
+
+		corridor_x = 0
+
+		ux_boss_hide()
+
+	elseif phase == 'WALK_PHASE' then
+
+		state = STATE_WALK
+
+		ux_hero_walk()
+
+	end
+
+end
 
 --
 
@@ -100,7 +134,15 @@ function ux_core_draw()
 
 	love.graphics.setCanvas(canvas)
 
-	love.graphics.draw(room_boss, 0, 0)
+	if state == STATE_FIGHT then
+
+		love.graphics.draw(room_boss, 0, 0)
+
+	elseif state == STATE_ITEMSEL or state == STATE_WALK then
+
+		love.graphics.draw(room_corridor, corridor_x, 0)
+
+	end
 
 	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
@@ -146,6 +188,18 @@ end
 
 --
 
+function ux_core_fight(payload)
+
+	state = STATE_FIGHT
+
+	ux_hero_fight()
+
+	ux_boss_fight(payload.body.ennemy)
+
+end
+
+--
+
 function ux_core_load()
 
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
@@ -169,6 +223,10 @@ function ux_core_load()
 	ux_levels_load(skin)
 
 	ux_core_create_buttons()
+
+	broker_subscribe('corridor_phase', ux_core_corridor)
+
+	broker_subscribe('fight_started', ux_core_fight)
 
 end
 
@@ -204,40 +262,50 @@ end
 
 function ux_core_update(dt)
 
+	ux_hero_update(dt)
+
+	ux_boss_update(dt)
+
+	if state == STATE_WALK then
+
+		corridor_x = corridor_x - 750 * dt
+
+	end
+
 	local mx, my = love.mouse.getPosition()
 
 	mx = (mx - pos.x) * unscale.x
 
 	my = (my - pos.y) * unscale.y
 
-	ux_hero_update(dt)
+	if state == STATE_FIGHT then
 
-	ux_boss_update(dt)
-
-	if ux_button_update(flee_button, mx, my) then
-
-		broker_send('button_pressed', {
-
-			sender = 'ux_core',
-
-			body = { type = 'FLEE' }
-		})
-
-	end
-
-	for _, button in ipairs(buttons) do
-
-		if ux_button_update(button.button, mx, my) then
+		if ux_button_update(flee_button, mx, my) then
 
 			broker_send('button_pressed', {
 
 				sender = 'ux_core',
 
-				body = { type = button.type }
+				body = { type = 'FLEE' }
 			})
 
 		end
 
+		for _, button in ipairs(buttons) do
+
+			if ux_button_update(button.button, mx, my) then
+
+				broker_send('button_pressed', {
+
+					sender = 'ux_core',
+
+					body = { type = button.type }
+				})
+
+			end
+
+		end
+		
 	end
 
 end
