@@ -20,7 +20,7 @@ configuration = {
             pression={from=0, to=1},
             health=150,
             drops={
-                "salary", "nap"
+                "SALARY", "NAP"
             },
             fleeable=true
         },
@@ -35,7 +35,7 @@ configuration = {
             pression={from=0, to=1},
             health=200,
             drops={
-                "salary", "nap"
+                "SALARY", "NAP"
             },
             fleeable=true
         },
@@ -50,7 +50,7 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "salary", "nap"
+                "SALARY", "NAP"
             },
             fleeable=true
         },    
@@ -65,7 +65,7 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "salary", "nap"
+                "SALARY", "NAP"
             },
             fleeable=true
         },
@@ -80,17 +80,17 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "salary", "nap"
+                "SALARY", "NAP"
             },
             fleeable=true
         },
     },
     flee_items={
-        "salary", "nap", "meditation", "laugh"
+        "SALARY", "NAP", "MEDITATION", "LAUGH"
     },
     items={
         {
-            id="salary",
+            id="SALARY",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -98,7 +98,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="nap",
+            id="NAP",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -106,7 +106,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="meditation",
+            id="MEDITATION",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -114,7 +114,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="laugh",
+            id="LAUGH",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -122,7 +122,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="exercise",
+            id="EXERCISE",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -130,7 +130,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="video game",
+            id="VIDEO_GAME",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -138,7 +138,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="drinking",
+            id="DRINKING",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -146,7 +146,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="sexy time",
+            id="SEXY_TIME",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -154,7 +154,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="drugs",
+            id="DRUGS",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -162,7 +162,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="meet friends",
+            id="MEET_FRIENDS",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -170,7 +170,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="food",
+            id="FOOD",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -178,7 +178,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="chilling",
+            id="CHILLING",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
@@ -186,7 +186,7 @@ configuration = {
             wrath={from=0, to=0},
         },
         {
-            id="music",
+            id="MUSIC",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},

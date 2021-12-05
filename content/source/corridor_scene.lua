@@ -13,7 +13,6 @@ function init_corridor(boss_loot)
 end
 
 function update_corridor(dt)
-    print(game_state.scene.phase)
     if game_state.scene.phase == "ITEM_SELECTION_PHASE" then
         update_item_selection_phase(dt)
     elseif game_state.scene.phase == "WALK_PHASE" then
