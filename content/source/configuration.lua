@@ -301,6 +301,7 @@ configuration = {
         ENNEMY_DEATH_PHASE=2,
         PLAYER_FLEE_PHASE=1,
         PLAYER_DEATH_FIGHT_PHASE=5,
+        STARTUP_PHASE=3
     },
     corridor_phase_timeouts={
         WALK_PHASE=4,

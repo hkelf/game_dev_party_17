@@ -3,6 +3,7 @@ require("source/utils")
 require("source/init_state")
 require("source/fight_scene")
 require("source/corridor_scene")
+require("source/title_scene")
 require("source/fight_phase/player_death_fight_phase")
 
 game_state = {
@@ -17,13 +18,16 @@ end
 
 function update_state(dt) 
     if not game_state.scene.type then
-        init_fight()
+        init_title()
     end
     if game_state.scene.type == "FIGHT" then 
         update_fight(dt)
     end
     if game_state.scene.type == "CORRIDOR" then
         update_corridor(dt)
+    end
+    if game_state.scene.type == "TITLE" then
+        update_title(dt)
     end
 end
 
