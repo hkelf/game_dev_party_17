@@ -79,7 +79,7 @@ function ux_hero_attack()
 
 	state = STATE_ATTACK
 
-	offset = 10
+	offset = 15
 
 end
 
@@ -271,7 +271,7 @@ function ux_hero_update(dt)
 
 	if state == STATE_HIT then
 
-		offset = offset - 20 * dt
+		offset = offset - 40 * dt
 
 	end
 

@@ -296,14 +296,14 @@ configuration = {
         wrath={from=0, to=5},
     },
     fight_phase_timeouts={
-        ATTACK_PHASE=2, 
-        ENNEMY_ATTACK_PHASE=2,
+        ATTACK_PHASE=1, 
+        ENNEMY_ATTACK_PHASE=1,
         ENNEMY_DEATH_PHASE=2,
-        PLAYER_FLEE_PHASE=2,
+        PLAYER_FLEE_PHASE=1,
         PLAYER_DEATH_FIGHT_PHASE=5,
     },
     corridor_phase_timeouts={
-        WALK_PHASE=2,
+        WALK_PHASE=4,
         ITEM_SELECTION_PHASE=2,
     },
 }
