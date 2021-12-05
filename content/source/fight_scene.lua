@@ -21,6 +21,8 @@ local select_ennemy = function()
 end
 
 function init_fight() 
+    if #game_state.ennemy_pool == 0 then return end
+
     game_state.scene = {
         type="FIGHT"
     }
