@@ -35,7 +35,7 @@ configuration = {
             pression={from=0, to=1},
             health=75,
             drops={
-                "SPORT", "NAP"
+                "EXERCISE", "NAP"
             },
             fleeable=true
         },
@@ -159,7 +159,7 @@ configuration = {
             exhaustion={from=0, to=0},
             debt={from=0, to=0},
             unhappiness={from=-40, to=-40},
-            wrath={from=0, to=0},
+            wrath={from=-40, to=-40},
         },
         {
             id="SEXY_TIME",
@@ -231,7 +231,7 @@ configuration = {
         },
         {
             id="OMNISLASH",
-            damages={from=20, to=70},
+            damages={from=35, to=70},
             self_damages={
                 stress={from=25, to=25},
                 exhaustion={from=0, to=0},
@@ -267,14 +267,14 @@ configuration = {
     buff={
         {
             id="resistance",
-            rounds=2,
+            rounds=3,
             -- percentages 
             resistance=50,
             damage_boost=0,
         },
         {
             id="berserk",
-            rounds=3,
+            rounds=4,
             -- percentages 
             resistance=0,
             damage_boost=50,
@@ -299,11 +299,11 @@ configuration = {
         ATTACK_PHASE=1, 
         ENNEMY_ATTACK_PHASE=1,
         ENNEMY_DEATH_PHASE=2,
-        PLAYER_FLEE_PHASE=2,
-        PLAYER_DEATH_FIGHT_PHASE=2,
+        PLAYER_FLEE_PHASE=1,
+        PLAYER_DEATH_FIGHT_PHASE=5,
     },
     corridor_phase_timeouts={
         WALK_PHASE=4,
-        ITEM_SELECTION_PHASE=1,
+        ITEM_SELECTION_PHASE=2,
     },
 }
