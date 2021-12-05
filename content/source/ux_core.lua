@@ -23,7 +23,13 @@ local STATE_FIGHT = 0x00
 
 local STATE_ITEMSEL = 0x01
 
-local STATE_WALK = 0x02
+local STATE_OVER = 0x02
+
+local STATE_START = 0x03
+
+local STATE_WALK = 0x04
+
+local STATE_WIN = 0x05
 
 local UX_HEIGHT = 1080
 
@@ -70,6 +76,8 @@ local canvas = nil
 
 local corridor_x = 0
 
+local cover = nil
+
 local fade_alpha = 0
 
 local fade_color = 0
@@ -77,6 +85,8 @@ local fade_color = 0
 local fade_speed = 0
 
 local flee_button = nil
+
+local game_over = nil
 
 local items = nil
 
@@ -98,9 +108,11 @@ local skills = nil
 
 local skin = nil
 
-local state = STATE_FIGHT
+local state = STATE_START
 
 local unscale = { x = 1, y = 1 }
+
+local win = nil
 
 --
 
@@ -230,6 +242,20 @@ function ux_core_draw()
 
 	ux_core_draw_buttons()
 
+	if state == STATE_START then
+
+		love.graphics.draw(cover, 0, 0)
+
+	elseif state == STATE_OVER then
+
+		love.graphics.draw(game_over, 0, 0)
+
+	elseif state == STATE_WIN then
+
+		love.graphics.draw(win, 0, 0)
+
+	end
+
 	local alpha = fade_alpha * fade_alpha * fade_alpha * fade_alpha
 
 	if alpha > 0.95 then alpha = 1 end
@@ -334,6 +360,8 @@ function ux_core_fight_phase(payload)
 
 	elseif phase == 'ENNEMY_DEATH_PHASE' then
 
+		ux_hero_fight()
+
 		ux_core_fade(FADE_LIGHT, 0, 0.5)
 
 	elseif phase == 'PLAYER_DEATH_FIGHT_PHASE' then
@@ -362,6 +390,10 @@ function ux_core_load()
 
 	ux_core_resize(love.graphics.getWidth(), love.graphics.getHeight())
 
+	cover = love.graphics.newImage('image/cover.png')
+
+	game_over = love.graphics.newImage('image/game_over.png')
+
 	items = love.graphics.newImage('image/item_icons.png')
 
 	room_boss = love.graphics.newImage('image/decor_boss.png')
@@ -371,6 +403,8 @@ function ux_core_load()
 	skin = love.graphics.newImage('image/final_ui.png')
 
 	skills = love.graphics.newImage('image/skill_buttons.png')
+
+	win = love.graphics.newImage('image/win.png')
 
 	ux_hero_load()
 
@@ -387,6 +421,26 @@ function ux_core_load()
 	broker_subscribe('fight_started', ux_core_fight)
 
 	broker_subscribe('fight_phase', ux_core_fight_phase)
+
+	broker_subscribe('win', ux_core_win)
+
+	broker_subscribe('game_over', ux_core_over)
+
+	ux_core_fade(FADE_DARK, 0, 0.2)
+
+end
+
+--
+
+function ux_core_over(payload)
+
+	if state ~= STATE_OVER then
+
+		state = STATE_OVER
+
+		ux_core_fade(FADE_DARK, 1, -0.5)
+
+	end
 
 end
 
@@ -493,6 +547,20 @@ function ux_core_update(dt)
 			})
 
 		end
+
+	end
+
+end
+
+--
+
+function ux_core_win(payload)
+
+	if state ~= STATE_WIN then
+
+		state = STATE_WIN
+
+		ux_core_fade(FADE_LIGHT, 1, -0.5)
 
 	end
 
