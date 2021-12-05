@@ -20,7 +20,7 @@ configuration = {
             pression={from=0, to=1},
             health=150,
             drops={
-                "psychologist"
+                "salary", "nap"
             },
             fleeable=true
         },
@@ -35,7 +35,7 @@ configuration = {
             pression={from=0, to=1},
             health=200,
             drops={
-                "psychologist"
+                "salary", "nap"
             },
             fleeable=true
         },
@@ -50,7 +50,7 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "psychologist"
+                "salary", "nap"
             },
             fleeable=true
         },    
@@ -65,7 +65,7 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "psychologist"
+                "salary", "nap"
             },
             fleeable=true
         },
@@ -80,7 +80,7 @@ configuration = {
             pression={from=0, to=1},
             health=120,
             drops={
-                "psychologist"
+                "salary", "nap"
             },
             fleeable=true
         },
