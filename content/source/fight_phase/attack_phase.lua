@@ -46,8 +46,7 @@ function init_attack_phase()
     -- game_state.
     local skill = find_by_id(game_state.selected.id, configuration.skills)
     game_state.current_skill = skill
-    print("SKILL SELECTED :")
-    print_table(game_state.current_skill)
+    print("SKILL SELECTED")
     broker_send("fight_phase", {sender="ATTACK_PHASE", body={phase="ATTACK_PHASE", skill=game_state.current_skill}})
 end
 

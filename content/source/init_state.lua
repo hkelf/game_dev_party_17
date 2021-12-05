@@ -34,32 +34,6 @@ local init_ennemy_pool = function(game_state)
         table.remove(1, game_state.ennemy_pool)
     end
 
-    print("===")
-    print("===")
-    print("===")
-    print("===")
-    print("===")
-    print("ENNEMY POOL")
-    print_table(game_state.ennemy_pool)
-    print("===")
-    print("===")
-    print("===")
-    print("===")
---[[
-    for i = 1, pool_size do
-        local to_be_selected = math.random(pool_size)
-        print(selected_ennemy[to_be_selected], to_be_selected)
-        if (selected_ennemy[to_be_selected]) then
-            to_be_selected = find_next_available(selected_ennemy, to_be_selected, pool_size)
-            if to_be_selected == 0 then break end
-        end
-        print_table(selected_ennemy)
-        print(to_be_selected)
-        selected_ennemy[to_be_selected] = true
-        
-        table.insert(game_state.ennemy_pool, configuration.ennemies[to_be_selected])
-    end
-]]
 end
 
 function initialize_state() 
@@ -80,6 +54,5 @@ function initialize_state()
     broker_send("player_created", { sender="state", body= { x=200, y=300} })
 
     print("STATE INITIALIZED")
-    print_table(game_state)
 end
 

@@ -1,6 +1,7 @@
 require("source/state")
 require("source/utils")
 require('source/ux_core')
+require("source/sound_server")
 math.randomseed(os.time())
 
 function love.draw()
