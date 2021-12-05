@@ -1,3 +1,19 @@
+local resolve_item = function() 
+    print("----")
+    print(game_state.selected.index)
+    print("----")
+    print_table(game_state.selectable_items)
+    print("----")
+    local id = game_state.selectable_items[game_state.selected.index]
+    local item = find_by_id(id, configuration.items)
+    game_state.stress = math.min(configuration.max, game_state.stress + rnd_in_range(item.stress))
+    game_state.exhaustion = math.min(configuration.max, game_state.exhaustion + rnd_in_range(item.exhaustion))
+    game_state.debt = math.min(configuration.max, game_state.debt + rnd_in_range(item.debt))
+    game_state.unhappiness = math.min(configuration.max, game_state.unhappiness + rnd_in_range(item.unhappiness))
+    game_state.wrath = math.min(configuration.max, game_state.wrath + rnd_in_range(item.wrath))
+    broker_send("player_health_update", {sender="attack_phase", body={state=game_state}})
+end
+
 function init_item_selection_phase(boss_loot)
     game_state.scene.phase="ITEM_SELECTION_PHASE"
     game_state.scene.timeout=configuration.corridor_phase_timeouts.ITEM_SELECTION_PHASE
@@ -16,14 +32,14 @@ function init_item_selection_phase(boss_loot)
 end
 
 function update_item_selection_phase(dt)
-    game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
-        if game_state.scene.timeout == 0 then
-            if game_state.stress == configuration.max 
+    if game_state.selected and game_state.selected.type == "ITEM" then
+        resolve_item()
+        if game_state.stress == configuration.max 
             or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
             or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
         then
             init_player_death_corridor_phase()
-        else
+        else 
             init_walk_phase()
         end
     end

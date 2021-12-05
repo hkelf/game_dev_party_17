@@ -54,6 +54,12 @@ function debug_events()
     if love.keyboard.isDown("f") then
         broker_send("button_pressed", {body={type="FLEE"}})
     end
+    if love.keyboard.isDown("w") then
+        broker_send("button_pressed", {body={type="ITEM", index=1}})
+    end
+    if love.keyboard.isDown("x") then
+        broker_send("button_pressed", {body={type="ITEM", index=2}})
+    end
 end
 
 function debug_console()
@@ -94,8 +100,8 @@ function debug_console()
     end
     if game_state.selectable_items then
         love.graphics.print(
-            "item 1 " .. game_state.selectable_items[1] .. "\n" ..
-            "item 2 " .. game_state.selectable_items[2] .. "\n"
+            "(w) item 1 " .. game_state.selectable_items[1] .. "\n" ..
+            "(x) item 2 " .. game_state.selectable_items[2] .. "\n"
             , 300, 0
         )
     end
