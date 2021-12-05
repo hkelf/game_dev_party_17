@@ -43,26 +43,24 @@ end
 function init_attack_phase()
     game_state.scene.phase="ATTACK_PHASE"
     game_state.scene.timeout=configuration.fight_phase_timeouts.ATTACK_PHASE
-    -- game_state.
     local skill = find_by_id(game_state.selected.id, configuration.skills)
     game_state.current_skill = skill
     print("SKILL SELECTED")
     broker_send("fight_phase", {sender="ATTACK_PHASE", body={phase="ATTACK_PHASE", skill=game_state.current_skill}})
+    resolve_damages()
+    resolve_self_damages()
+    resolve_buff()
 end
 
 function update_attack_phase(dt)
     game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
     if game_state.scene.timeout == 0 then
-        resolve_damages()
-        resolve_self_damages()
-        resolve_buff()
         if game_state.stress == configuration.max 
             or game_state.exhaustion == configuration.max or game_state.debt == configuration.max 
             or game_state.unhappiness == configuration.max or game_state.wrath == configuration.max 
         then
             init_player_death_fight_phase()
         elseif game_state.current_ennemy.health <= 0 then
-            print("LETZGO")
             init_ennemy_death_phase()
         else 
             init_ennemy_attack_phase()
