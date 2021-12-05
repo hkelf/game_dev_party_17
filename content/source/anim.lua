@@ -84,6 +84,14 @@ end
 
 --
 
+function anim_reskin(anim, name, image)
+
+	anim.defs[name].image = image
+
+end
+
+--
+
 function anim_static(anim, name)
 
 	anim_play(anim, name, 'once')

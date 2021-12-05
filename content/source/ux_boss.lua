@@ -1,47 +1,89 @@
 
 require('source/anim')
 
+require('source/broker')
+
+require('source/sprite')
+
 --
 
 local anim = nil
 
-local breakup = nil
+local hpscale = 1
 
-local finance = nil
+local images = { }
 
-local mourn = nil
+local skin = nil
 
-local neighbour = nil
-
-local work = nil
+local visible = false
 
 --
 
 function ux_boss_draw(x, y)
 
-	anim_draw_scaled(anim, x, y, 0.65, 0.65)
+	if visible then
+
+		anim_draw_scaled(anim, x, y, 0.65, 0.65)
+
+		local empty = sprite_clip(skin, 622, 282, 374, 57)
+
+		love.graphics.draw(skin, empty, x + 150, y - 50)
+
+		local offset = 374 * hpscale
+
+		local filled = sprite_clip(skin, 622 + offset, 210, 374 - offset, 57)
+
+		love.graphics.draw(skin, filled, x + 150 + offset, y - 50)
+
+	end
 
 end
 
 --
 
-function ux_boss_load()
+function ux_boss_fight(payload)
 
-	breakup = love.graphics.newImage('image/boss_breakup.png')
+	anim_reskin(anim, 'base', images[payload.body.ennemy])
 
-	finance = love.graphics.newImage('image/boss_finance.png')
+	anim_play(anim, 'base', 'loop')
 
-	mourn = love.graphics.newImage('image/boss_mourn.png')
+	visible = true
 
-	neighbour = love.graphics.newImage('image/boss_neighbour.png')
+end
 
-	work = love.graphics.newImage('image/boss_work.png')
+--
+
+function ux_boss_hit(payload)
+
+	local health = payload.body.health
+
+	local max = payload.body.initial_health
+
+	hpscale = 1 - (health / max)
+
+end
+
+--
+
+function ux_boss_load(ui_skin)
+
+	skin = ui_skin
+
+	images.breakup = love.graphics.newImage('image/boss_breakup.png')
+
+	images.finance = love.graphics.newImage('image/boss_finance.png')
+
+	images.mourn = love.graphics.newImage('image/boss_mourn.png')
+
+	images.neighbour = love.graphics.newImage('image/boss_neighbour.png')
+
+	images.work = love.graphics.newImage('image/boss_work.png')
 
 	anim = anim_new({
 
 		base = {
 
-			image = work,
+			image = images.work,
 
 			frames = {
 
@@ -53,12 +95,20 @@ function ux_boss_load()
 
 	anim_play(anim, 'base', 'loop')
 
+	broker_subscribe('fight_started', ux_boss_fight)
+
+	broker_subscribe('ennemy_health_update', ux_boss_hit)
+
 end
 
 --
 
 function ux_boss_update(dt)
 
-	anim_update(anim, dt)
+	if visible then
+
+		anim_update(anim, dt)
+
+	end
 
 end

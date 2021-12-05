@@ -162,7 +162,7 @@ function ux_core_load()
 
 	ux_hero_load()
 
-	ux_boss_load()
+	ux_boss_load(skin)
 
 	ux_pressure_load(skin)
 

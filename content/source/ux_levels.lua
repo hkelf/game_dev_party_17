@@ -5,17 +5,17 @@ require('source/sprite')
 
 --
 
-local debt = 0
+local debt = 1
 
-local exhaustion = 0
+local exhaustion = 1
 
 local skin = nil
 
-local stress = 0
+local stress = 1
 
-local unhap = 0
+local unhap = 1
 
-local wrath = 0
+local wrath = 1
 
 --
 
@@ -25,15 +25,15 @@ function ux_levels_change(payload)
 
 	local max = configuration.max
 
-	debt = state.debt / max
+	debt = 1 - (state.debt / max)
 
-	exhaustion = state.exhaustion / max
+	exhaustion = 1 - (state.exhaustion / max)
 
-	stress = state.stress / max
+	stress = 1 - (state.stress / max)
 
-	unhap = state.unhappiness / max
+	unhap = 1 - (state.unhappiness / max)
 
-	wrath = state.wrath / max
+	wrath = 1 - (state.wrath / max)
 
 end
 
@@ -61,7 +61,7 @@ end
 
 function ux_levels_draw_value(scale, x, y, rect_x)
 
-	local offset = 203 * (1 - scale)
+	local offset = 203 * scale
 
 	local clip = sprite_clip(skin, rect_x, 155 + offset, 27, 203 - offset)
 
