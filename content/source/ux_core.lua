@@ -15,6 +15,10 @@ require('source/ux_pressure')
 
 --
 
+local FADE_DARK = 0.05
+
+local FADE_LIGHT = 0.95
+
 local STATE_FIGHT = 0x00
 
 local STATE_ITEMSEL = 0x01
@@ -66,6 +70,12 @@ local canvas = nil
 
 local corridor_x = 0
 
+local fade_alpha = 0
+
+local fade_color = 0
+
+local fade_speed = 0
+
 local flee_button = nil
 
 local items = nil
@@ -104,15 +114,21 @@ function ux_core_corridor(payload)
 
 		corridor_x = 0
 
+		ux_hero_fight()
+
 		ux_boss_hide()
 
 		ux_core_create_item_buttons(payload.body.items)
+
+		ux_core_fade(FADE_LIGHT, 1, -0.5)
 
 	elseif phase == 'WALK_PHASE' then
 
 		state = STATE_WALK
 
 		ux_hero_walk()
+
+		ux_core_fade(FADE_DARK, 0, 0.25)
 
 	end
 
@@ -215,6 +231,14 @@ function ux_core_draw()
 
 	ux_core_draw_buttons()
 
+	local alpha = fade_alpha * fade_alpha * fade_alpha * fade_alpha
+
+	love.graphics.setColor(fade_color, fade_color, fade_color, alpha)
+
+	love.graphics.rectangle('fill', 0, 0, UX_WIDTH, UX_HEIGHT)
+
+	love.graphics.setColor(1, 1, 1)
+
 	love.graphics.setCanvas()
 
 	love.graphics.draw(canvas, pos.x, pos.y, 0, scale.x, scale.y)
@@ -259,6 +283,18 @@ end
 
 --
 
+function ux_core_fade(color, initial, speed)
+
+	fade_color = color
+
+	fade_alpha = initial
+
+	fade_speed = speed
+
+end
+
+--
+
 function ux_core_fight(payload)
 
 	state = STATE_FIGHT
@@ -268,6 +304,8 @@ function ux_core_fight(payload)
 	ux_boss_fight(payload.body.ennemy.id)
 
 	can_flee = payload.body.ennemy.fleeable
+
+	ux_core_fade(FADE_DARK, 1, -1)
 
 end
 
@@ -290,6 +328,18 @@ function ux_core_fight_phase(payload)
 	elseif phase == 'ENNEMY_ATTACK_PHASE' then
 
 		ux_hero_hit()
+
+	elseif phase == 'ENNEMY_DEATH_PHASE' then
+
+		ux_core_fade(FADE_LIGHT, 0, 0.5)
+
+	elseif phase == 'PLAYER_DEATH_FIGHT_PHASE' then
+
+		ux_core_fade(FADE_DARK, 0, 0.5)
+
+	elseif phase == 'PLAYER_FLEE_PHASE' then
+
+		ux_core_fade(FADE_LIGHT, 0, 0.5)
 
 	else
 
@@ -366,6 +416,10 @@ end
 --
 
 function ux_core_update(dt)
+
+	fade_alpha = fade_alpha + fade_speed * dt
+
+	fade_alpha = math.max(math.min(fade_alpha, 1), 0)
 
 	ux_hero_update(dt)
 
