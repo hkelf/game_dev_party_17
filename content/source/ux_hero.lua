@@ -49,16 +49,6 @@ end
 
 --
 
-function ux_hero_corridor()
-
-	state = STATE_WALK
-
-	anim_play(anim_walk, 'base', 'loop')
-
-end
-
---
-
 function ux_hero_draw(x, y)
 
 	love.graphics.draw(shadow, x - 90, y - 40)
@@ -196,5 +186,15 @@ function ux_hero_update(dt)
 	end
 
 	anim_update(ux_hero_anim(), dt)
+
+end
+
+--
+
+function ux_hero_walk()
+
+	state = STATE_WALK
+
+	anim_play(anim_walk, 'base', 'loop')
 
 end
