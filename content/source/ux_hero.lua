@@ -11,7 +11,9 @@ local STATE_HIT = 0x01
 
 local STATE_STAND = 0x02
 
-local STATE_WALK = 0x03
+local STATE_TIRED = 0x03
+
+local STATE_WALK = 0x04
 
 --
 
@@ -26,6 +28,8 @@ local anim_aura = nil
 local anim_hit = nil
 
 local anim_stand = nil
+
+local anim_tired = nil
 
 local anim_walk = nil
 
@@ -68,6 +72,12 @@ function ux_hero_anim()
 	if state == STATE_ATTACK then
 
 		return anim_attack
+
+	end
+
+	if state == STATE_TIRED then
+
+		return anim_tired
 
 	end
 
@@ -229,6 +239,23 @@ function ux_hero_load()
 		}
 	})
 
+	anim_tired = anim_new({
+
+		base = {
+
+			image = stand,
+
+			frames = {
+
+				{ x = 0, y = 398, w = 284, h = 398, t = 0.2 },
+				{ x = 284, y = 398, w = 284, h = 398, t = 0.2 },
+				{ x = 568, y = 398, w = 284, h = 398, t = 0.2 },
+				{ x = 852, y = 398, w = 284, h = 398, t = 0.2 },
+				{ x = 1136, y = 398, w = 284, h = 398, t = 0.2 }
+			}
+		}
+	})
+
 	anim_walk = anim_new({
 
 		base = {
@@ -254,6 +281,24 @@ function ux_hero_load()
 	anim_static(anim_attack, 'base')
 
 	anim_static(anim_hit, 'base')
+
+	broker_subscribe('pression_updated', ux_hero_pressure_change)
+
+end
+
+--
+
+function ux_hero_pressure_change(payload)
+
+	local value = payload.body.pression
+
+	if value <= 0 and state ~= STATE_TIRED then
+
+		state = STATE_TIRED
+
+		anim_play(anim_tired, 'base', 'loop')
+
+	end
 
 end
 

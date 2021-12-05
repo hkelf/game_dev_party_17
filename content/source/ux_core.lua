@@ -35,6 +35,12 @@ local corridor_x = 0
 
 local flee_button = nil
 
+local items = nil
+
+local item_left = nil
+
+local item_right = nil
+
 local pos = { x = 0, y = 0 }
 
 local room_boss = nil
@@ -66,6 +72,8 @@ function ux_core_corridor(payload)
 		corridor_x = 0
 
 		ux_boss_hide()
+
+		ux_core_create_item_buttons()
 
 	elseif phase == 'WALK_PHASE' then
 
@@ -106,6 +114,20 @@ function ux_core_create_flee_button()
 	local pressed = { x = 210, y = 301, w = 128, h = 103 }
 
 	flee_button = ux_button_new(skin, normal, pressed)
+
+end
+
+--
+
+function ux_core_create_item_buttons()
+
+	local left = { x = 8, y = 16, w = 125, h = 125 }
+
+	item_left = ux_button_new(items, left, left)
+
+	local right = { x = 149, y = 16, w = 125, h = 125 }
+
+	item_right = ux_button_new(items, right, right)
 
 end
 
@@ -174,6 +196,14 @@ function ux_core_draw_buttons()
 
 	end
 
+	if state == STATE_ITEMSEL then
+
+		ux_button_draw(item_left, safe.w * 0.5 - 150, safe.h * 0.4)
+
+		ux_button_draw(item_right, safe.w * 0.5 + 150, safe.h * 0.4)
+
+	end
+
 end
 
 --
@@ -231,6 +261,8 @@ function ux_core_load()
 	canvas = love.graphics.newCanvas(UX_WIDTH, UX_HEIGHT)
 
 	ux_core_resize(love.graphics.getWidth(), love.graphics.getHeight())
+
+	items = love.graphics.newImage('image/item_icons.png')
 
 	room_boss = love.graphics.newImage('image/decor_boss.png')
 
@@ -331,6 +363,30 @@ function ux_core_update(dt)
 				})
 
 			end
+
+		end
+
+	elseif state == STATE_ITEMSEL then
+
+		if ux_button_update(item_left, mx, my) then
+
+			broker_send('button_pressed', {
+
+				sender = 'ux_core',
+
+				body = { type = 'ITEM', index = 1 }
+			})
+
+		end
+
+		if ux_button_update(item_right, mx, my) then
+
+			broker_send('button_pressed', {
+
+				sender = 'ux_core',
+
+				body = { type = 'ITEM', index = 2 }
+			})
 
 		end
 

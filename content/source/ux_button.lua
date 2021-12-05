@@ -51,8 +51,8 @@ end
 
 function ux_button_new(image, normal, pressed, x, y)
 
-	local button = {}
-
+	local button = { }
+	
 	normal.t = 0
 
 	pressed.t = 0
