@@ -87,7 +87,7 @@ configuration = {
     },
     items={
         {
-            id="salary"
+            id="salary",
             stress={from=-10, to=0},
             exhaustion={from=0, to=0},
             debt={from=5, to=5},
