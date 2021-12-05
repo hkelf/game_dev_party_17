@@ -197,7 +197,7 @@ configuration = {
     skills={
         {
             id="ATTACK",
-            damages={from=100, to=100},
+            damages={from=10, to=10},
             self_damages={
                 stress={from=0, to=0},
                 exhaustion={from=0, to=0},

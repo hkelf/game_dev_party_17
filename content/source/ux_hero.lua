@@ -344,6 +344,10 @@ function ux_hero_load()
 
 	broker_subscribe('pression_updated', ux_hero_pressure_change)
 
+	broker_subscribe('buff_added', function(_) has_aura = true end)
+
+	broker_subscribe('buff_removed', function(_) has_aura = false end)
+
 end
 
 --
