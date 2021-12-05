@@ -6,7 +6,7 @@ math.randomseed(os.time())
 
 function love.draw()
     ux_core_draw()
-    debug_console()
+    -- debug_console()
 end
 
 --
