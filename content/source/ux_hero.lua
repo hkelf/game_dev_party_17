@@ -25,6 +25,8 @@ local anim_attack = nil
 
 local anim_aura = nil
 
+local anim_kameha = nil
+
 local anim_hit = nil
 
 local anim_stand = nil
@@ -37,9 +39,13 @@ local has_aura = false
 
 local hit = nil
 
+local kameha = nil
+
 local offset = 0
 
 local shadow = nil
+
+local show_kameha = false
 
 local stand = nil
 
@@ -99,6 +105,10 @@ function ux_hero_attack(skill)
 
 		offset = 40
 
+	elseif skill == 'FIREBALL' then
+
+		show_kameha = true
+
 	end
 
 end
@@ -116,6 +126,12 @@ function ux_hero_draw(x, y)
 	end
 
 	ux_hero_draw_hero(x, y)
+
+	if show_kameha then
+
+		anim_draw(anim_kameha, x + 80, y - 220)
+
+	end
 
 end
 
@@ -157,6 +173,8 @@ function ux_hero_fight()
 
 	offset = 0
 
+	show_kameha = false
+
 	anim_play(anim_stand, 'base', 'loop')
 
 end
@@ -169,6 +187,8 @@ function ux_hero_hit()
 
 	offset = 0
 
+	show_kameha = false
+
 end
 
 --
@@ -180,6 +200,8 @@ function ux_hero_load()
 	aura = love.graphics.newImage('image/hero_aura.png')
 
 	hit = love.graphics.newImage('image/hero_hit.png')
+
+	kameha = love.graphics.newImage('image/kameha.png')
 
 	shadow = love.graphics.newImage('image/hero_shadow.png')
 
@@ -281,6 +303,32 @@ function ux_hero_load()
 		}
 	})
 
+	anim_kameha = anim_new({
+
+		base = {
+
+			image = kameha,
+
+			frames = {
+
+				{ x = 0, y = 0, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 196, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 392, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 588, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 784, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 980, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 1176, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 1372, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 1568, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 1764, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 1960, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 2156, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 2352, w = 1224, h = 196, t = 0.1 },
+				{ x = 0, y = 2548, w = 1224, h = 196, t = 0.1 }
+			}
+		}
+	})
+
 	anim_stand = anim_new({
 
 		base = {
@@ -342,6 +390,8 @@ function ux_hero_load()
 
 	anim_static(anim_hit, 'base')
 
+	anim_play(anim_kameha, 'base', 'loop')
+
 	broker_subscribe('pression_updated', ux_hero_pressure_change)
 
 	broker_subscribe('buff_added', function(_) has_aura = true end)
@@ -381,6 +431,12 @@ function ux_hero_update(dt)
 	if state == STATE_HIT then
 
 		offset = offset - 40 * dt
+
+	end
+
+	if show_kameha then
+
+		anim_update(anim_kameha, dt)
 
 	end
 

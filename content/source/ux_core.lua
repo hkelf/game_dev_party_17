@@ -218,9 +218,9 @@ function ux_core_draw()
 
 	end
 
-	ux_hero_draw(safe.x + 400, safe.h * 0.6)
-
 	ux_boss_draw(safe.w * 0.5, safe.h * 0.1)
+
+	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
 	ux_levels_draw(safe.w - 1451, safe.h - 223)
 
