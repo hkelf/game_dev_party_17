@@ -53,11 +53,11 @@ function ux_levels_draw(x, y)
 
 	ux_levels_draw_value(wrath, x + 42, y, 402)
 
-	ux_levels_draw_value(exhaustion, x + 85, y, 445)
+	ux_levels_draw_value(unhap, x + 85, y, 445)
 
-	ux_levels_draw_value(stress, x + 127, y, 487)
+	ux_levels_draw_value(exhaustion, x + 127, y, 487)
 
-	ux_levels_draw_value(unhap, x + 169, y, 529)
+	ux_levels_draw_value(stress, x + 169, y, 529)
 
 end
 
