@@ -28,7 +28,7 @@ function init_item_selection_phase(boss_loot)
         end
         game_state.selectable_items=items
     end
-    broker_send("corridor_phase", {sender="item_selection_phase", body={phase="ITEM_SELECTION_PHASE"}})
+    broker_send("corridor_phase", {sender="item_selection_phase", body={phase="ITEM_SELECTION_PHASE", items=game_state.selectable_items}})
 end
 
 function update_item_selection_phase(dt)
