@@ -9,7 +9,7 @@ local resolve_damages = function()
         0, game_state.current_ennemy.health - coef * rnd_in_range(game_state.current_skill.damages)
     ))
 
-    broker_send("ennemy_health_update", {sender="attack_phase", body={health=game_state.current_ennemy.health}})
+    broker_send("ennemy_health_update", {sender="attack_phase", body=game_state.current_ennemy})
 end
 
 local resolve_self_damages = function() 

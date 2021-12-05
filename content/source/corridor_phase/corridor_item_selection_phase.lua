@@ -1,6 +1,14 @@
-function init_item_selection_phase()
+function init_item_selection_phase(boss_loot)
     game_state.scene.phase="ITEM_SELECTION_PHASE"
     game_state.scene.timeout=configuration.corridor_phase_timeouts.ITEM_SELECTION_PHASE
+    if boss_loot then 
+        game_state.selectable_items=table_clone(boss_loot)
+    else
+        local items = table_clone(configuration.flee_items)
+        
+        game_state.selectable_items=table_clone(configuration.flee_items)
+
+    end
     broker_send("corridor_phase", {sender="item_selection_phase", body={phase="ITEM_SELECTION_PHASE"}})
 end
 

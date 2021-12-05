@@ -1,7 +1,7 @@
 require("source/corridor_phase/corridor_item_selection_phase")
 require("source/corridor_phase/corridor_walk_phase")
 
-function init_corridor() 
+function init_corridor(boss_loot) 
     game_state.scene = {
         type="CORRIDOR"
     }
@@ -9,7 +9,7 @@ function init_corridor()
     print_table(game_state)
     print("\n")
     broker_send("corridor_started", { sender="corridor_scene" })
-    init_item_selection_phase()
+    init_item_selection_phase(boss_loot)
 end
 
 function update_corridor(dt)

@@ -7,7 +7,7 @@ configuration = {
     initial_debt=0,
     initial_unhappiness=0,
     initial_wrath=0,
-    number_of_ennemies=1,
+    number_of_ennemies=2,
     ennemies={
         {
             id="breakup",
@@ -84,6 +84,9 @@ configuration = {
             },
             fleeable=true
         },
+    },
+    flee_items={
+        "salary", "nap", "meditation", "laugh"
     },
     items={
         {

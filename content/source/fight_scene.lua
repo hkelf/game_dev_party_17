@@ -15,6 +15,7 @@ local select_ennemy = function()
     then 
         game_state.already_fought_ennemies = {} 
     end
+    game_state.current_ennemy.initial_health = game_state.current_ennemy.health
     print("SELECTED ENNEMY:")
     print_table(game_state.current_ennemy)
     game_state.already_fought_ennemies[game_state.current_ennemy.id] = true
