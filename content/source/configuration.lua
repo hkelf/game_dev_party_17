@@ -12,7 +12,7 @@ configuration = {
         {
             id="breakup",
             image="dummy.png",
-            stress={from=100, to=100},
+            stress={from=0, to=0},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -27,7 +27,7 @@ configuration = {
         {
             id="finance",
             image="dummy.png",
-            stress={from=100, to=100},
+            stress={from=0, to=0},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -42,7 +42,7 @@ configuration = {
         {
             id="mourn",
             image="dummy.png",
-            stress={from=100, to=100},
+            stress={from=0, to=0},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -57,7 +57,7 @@ configuration = {
         {
             id="neighbour",
             image="dummy.png",
-            stress={from=100, to=100},
+            stress={from=0, to=0},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
@@ -72,7 +72,7 @@ configuration = {
         {
             id="work",
             image="dummy.png",
-            stress={from=100, to=100},
+            stress={from=0, to=0},
             exhaustion={from=0, to=10},
             debt={from=0, to=10},
             unhappiness={from=0, to=10},
