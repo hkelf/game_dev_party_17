@@ -1,5 +1,14 @@
 local resolve_damages = function() 
-    game_state.current_ennemy.health = math.max(0, game_state.current_ennemy.health - rnd_in_range(game_state.current_skill.damages))
+    local coef = 1
+
+    if game_state.buff then
+        coef = (100 - game_state.buff.resistance) / 100
+    end
+
+    game_state.current_ennemy.health = math.floor(math.max(
+        0, game_state.current_ennemy.health - coef * rnd_in_range(game_state.current_skill.damages)
+    ))
+
     broker_send("ennemy_health_update", {sender="attack_phase", body={health=game_state.current_ennemy.health}})
 end
 
@@ -17,6 +26,15 @@ local resolve_buff = function()
         local buff = find_by_id(game_state.current_skill.buff, configuration.buff)
         game_state.buff = table.clone(buff)
         broker_send("buff_added", {sender="attack_phase", body={buff=buff}})
+    end
+
+    if game_state.buff then
+        game_state.buff.rounds = game_state.buff.rounds - 1
+        
+        if game_state.buff.rounds == 0 then
+            game_state.buff = nil
+            broker_send("buff_removed", {sender="attack_phase"})
+        end
     end
 end
 
@@ -37,8 +55,8 @@ function update_attack_phase(dt)
     game_state.scene.timeout = math.max(game_state.scene.timeout - dt, 0)
     if game_state.scene.timeout == 0 then
         resolve_damages()
-        -- resolve_buff()
         resolve_self_damages()
+        resolve_buff()
         init_ennemy_attack_phase()
         game_state.current_skill = nil
     end

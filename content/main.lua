@@ -85,4 +85,12 @@ function debug_console()
             )
         end
     end
+    if game_state.buff then
+        love.graphics.print(
+            "buff rounds : " .. game_state.buff.rounds .. "\n" ..
+            "buff name: " .. game_state.buff.id .. "\n"
+            , 200, 0
+        ) 
+    end
+
 end

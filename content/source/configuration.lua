@@ -69,8 +69,6 @@ configuration = {
         {
             id="ATTACK",
             damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -81,9 +79,8 @@ configuration = {
         },
         {
             id="DEFEND",
-            damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
+            damages={from=0, to=0},
+            buff="resistance",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -95,8 +92,6 @@ configuration = {
         {
             id="FIREBALL",
             damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -108,8 +103,6 @@ configuration = {
         {
             id="OMNISLASH",
             damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -120,22 +113,19 @@ configuration = {
         },
         {
             id="BERSERK",
-            damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
+            damages={from=0, to=0},
+            buff="berserk",
             self_damages={
-                stress={from=10, to=0},
+                stress={from=0, to=0},
                 exhaustion={from=0, to=0},
-                debt={from=5, to=5},
-                unhappiness={from=10, to=10},
+                debt={from=0, to=0},
+                unhappiness={from=0, to=0},
                 wrath={from=0, to=0},
             }
         },
         {
             id="BLEED",
             damages={from=0, to=100},
-            buff="motivation",
-            debuff="bleed",
             self_damages={
                 stress={from=10, to=0},
                 exhaustion={from=0, to=0},
@@ -147,26 +137,19 @@ configuration = {
     },
     buff={
         {
-            id="motivation",
-            rounds={from=5, to=5},
-            restauration={
-                stress={from=-10, to=0},
-                exhaustion={from=0, to=0},
-                debt={from=-5, to=-5},
-                unhappiness={from=-10, to=-10},
-                wrath={from=0, to=0},
-            },
+            id="resistance",
+            rounds=3,
             -- percentages 
-            resistance={ 
-                stress={from=30, to=40},
-                exhaustion={from=10, to=10},
-                debt={from=5, to=10},
-                unhappiness={from=0, to=0},
-                wrath={from=0, to=0},
-            },
-            damage_boost={from=5, to=10},
-            flee_boost={from=5, to=10},
-        }
+            resistance=90,
+            damage_boost=0,
+        },
+        {
+            id="berserk",
+            rounds=3,
+            -- percentages 
+            resistance=0,
+            damage_boost=10,
+        },
     },
     debuff={
         id="bleed",
