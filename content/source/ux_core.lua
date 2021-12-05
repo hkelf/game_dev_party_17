@@ -181,7 +181,7 @@ end
 --
 
 function ux_core_create_item_buttons(choice)
-	
+
 	local lpos = ITEM_COORDS[choice[1]]
 
 	local left = { x = lpos.x, y = lpos.y, w = 125, h = 125 }
@@ -366,6 +366,8 @@ function ux_core_fight_phase(payload)
 		ux_core_fade(FADE_LIGHT, 0, 0.5)
 
 	elseif phase == 'PLAYER_DEATH_FIGHT_PHASE' then
+
+		ux_hero_hit()
 
 		ux_core_fade(FADE_DARK, 0, 0.5)
 
