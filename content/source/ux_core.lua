@@ -153,7 +153,7 @@ end
 --
 
 function ux_core_create_item_buttons(choice)
-	print_table(choice)
+	
 	local lpos = ITEM_COORDS[choice[1]]
 
 	local left = { x = lpos.x, y = lpos.y, w = 125, h = 125 }
@@ -283,7 +283,9 @@ function ux_core_fight_phase(payload)
 
 	elseif phase == 'ATTACK_PHASE' then
 
-		ux_hero_attack()
+		local skill = payload.body.skill
+
+		ux_hero_attack(skill.id)
 
 	elseif phase == 'ENNEMY_ATTACK_PHASE' then
 

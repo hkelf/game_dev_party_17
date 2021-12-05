@@ -85,11 +85,21 @@ end
 
 --
 
-function ux_hero_attack()
+function ux_hero_attack(skill)
 
 	state = STATE_ATTACK
 
-	offset = 15
+	anim_static(anim_attack, skill)
+
+	if skill == 'DEFEND' then
+
+		offset = 20
+
+	elseif skill == 'OMNISLASH' then
+
+		offset = 40
+
+	end
 
 end
 
@@ -179,13 +189,63 @@ function ux_hero_load()
 
 	anim_attack = anim_new({
 
-		base = {
+		ATTACK = {
 
 			image = attack,
 
 			frames = {
 
 				{ x = 0, y = 0, w = 324, h = 384, t = 0 }
+			}
+		},
+
+		DEFEND = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 324, y = 0, w = 324, h = 384, t = 0 }
+			}
+		},
+
+		FIREBALL = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 648, y = 0, w = 324, h = 384, t = 0 }
+			}
+		},
+
+		OMNISLASH = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 972, y = 0, w = 324, h = 384, t = 0 }
+			}
+		},
+
+		BERSERK = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 1296, y = 0, w = 324, h = 384, t = 0 }
+			}
+		},
+
+		BLEED = {
+
+			image = attack,
+
+			frames = {
+
+				{ x = 1620, y = 0, w = 324, h = 384, t = 0 }
 			}
 		}
 	})
@@ -278,7 +338,7 @@ function ux_hero_load()
 
 	anim_play(ux_hero_anim(), 'base', 'loop')
 
-	anim_static(anim_attack, 'base')
+	anim_static(anim_attack, 'ATTACK')
 
 	anim_static(anim_hit, 'base')
 
