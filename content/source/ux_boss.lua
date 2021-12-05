@@ -9,7 +9,7 @@ require('source/sprite')
 
 local anim = nil
 
-local hpscale = 1
+local hpscale = 0
 
 local images = { }
 

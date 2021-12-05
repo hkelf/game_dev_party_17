@@ -1,6 +1,8 @@
 
 require('source/anim')
 
+require('source/broker')
+
 --
 
 local STATE_STAND = 0x00
@@ -23,7 +25,7 @@ local shadow = nil
 
 local stand = nil
 
-local state = STATE_WALK
+local state = STATE_STAND
 
 local walk = nil
 
@@ -42,6 +44,16 @@ function ux_hero_anim()
 		return anim_walk
 
 	end
+
+end
+
+--
+
+function ux_hero_corridor(payload)
+
+	state = STATE_WALK
+
+	anim_play(ux_hero_anim(), 'base', 'loop')
 
 end
 
@@ -160,6 +172,8 @@ function ux_hero_load()
 	anim_play(anim_aura, 'base', 'loop')
 
 	anim_play(ux_hero_anim(), 'base', 'loop')
+
+	broker_subscribe('corridor_phase', ux_hero_corridor)
 
 end
 
