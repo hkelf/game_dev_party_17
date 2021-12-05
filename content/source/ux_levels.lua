@@ -45,6 +45,10 @@ function ux_levels_draw(x, y)
 
 	love.graphics.draw(skin, base, x, y)
 
+	local icons = sprite_clip(skin, 354, 101, 214, 47)
+
+	love.graphics.draw(skin, icons, x - 5, y - 60)
+
 	ux_levels_draw_value(debt, x, y, 360)
 
 	ux_levels_draw_value(wrath, x + 42, y, 402)

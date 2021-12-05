@@ -181,6 +181,7 @@ end
 --
 
 function ux_core_create_item_buttons(choice)
+	
 	local lpos = ITEM_COORDS[choice[1]]
 
 	local left = { x = lpos.x, y = lpos.y, w = 125, h = 125 }
@@ -438,7 +439,7 @@ function ux_core_over(payload)
 
 		state = STATE_OVER
 
-		ux_core_fade(FADE_DARK, 1, -0.5)
+		ux_core_fade(FADE_DARK, 1, -0.2)
 
 	end
 
@@ -560,7 +561,7 @@ function ux_core_win(payload)
 
 		state = STATE_WIN
 
-		ux_core_fade(FADE_LIGHT, 1, -0.5)
+		ux_core_fade(FADE_LIGHT, 1, -0.2)
 
 	end
 
