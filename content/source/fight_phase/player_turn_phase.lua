@@ -32,7 +32,7 @@ function update_player_turn_phase(dt)
             game_state.pression_timeout = configuration.pression_penalty.timeout
         end
         game_state.pression_timeout = math.max(0, game_state.pression_timeout - dt)
-        print(game_state.pression_timeout)
+        --print(game_state.pression_timeout)
         if game_state.pression_timeout == 0 then
             game_state.pression_timeout = configuration.pression_penalty.timeout
             game_state.stress = math.min(configuration.max, game_state.stress + rnd_in_range(configuration.pression_penalty.stress))
