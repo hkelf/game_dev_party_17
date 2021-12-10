@@ -47,7 +47,7 @@ function ux_boss_draw(x, y)
 
 		end
 
-		anim_draw_scaled(anim, x, y, 0.65, 0.65)
+		anim_draw(anim, x, y)
 
 		love.graphics.setColor(1, 1, 1)
 
@@ -127,8 +127,8 @@ function ux_boss_load(ui_skin)
 
 			frames = {
 
-				{ x = 0, y = 0, w = 960, h = 1080, t = 0.5 },
-				{ x = 960, y = 0, w = 960, h = 1080, t = 0.5 }
+				{ x = 0, y = 0, w = 624, h = 702, t = 0.5 },
+				{ x = 624, y = 0, w = 624, h = 702, t = 0.5 }
 			}
 		},
 
@@ -138,8 +138,8 @@ function ux_boss_load(ui_skin)
 
 			frames = {
 
-				{ x = 0, y = 0, w = 960, h = 1080, t = 0.2 },
-				{ x = 960, y = 0, w = 960, h = 1080, t = 0.2 }
+				{ x = 0, y = 0, w = 624, h = 702, t = 0.2 },
+				{ x = 624, y = 0, w = 624, h = 702, t = 0.2 }
 			}
 		}
 	})
