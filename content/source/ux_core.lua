@@ -200,17 +200,17 @@ end
 
 function ux_core_create_skill_button(id, name)
 
-	local offset = 8 + id * 198
+	local offset = 1 + id * 148
 
-	local normal = { x = offset, y = 6, w = 193, h = 181 }
+	local normal = { x = offset, y = 6, w = 145, h = 137 }
 
-	local pressed = { x = offset, y = 212, w = 193, h = 181 }
+	local pressed = { x = offset, y = 157, w = 145, h = 137 }
 
 	return {
 
 		button = ux_button_new(skills, normal, pressed),
 
-		type = name, offset = 1121 - 198 * id
+		type = name, offset = 840 - 148 * id
 	}
 
 end
@@ -235,7 +235,7 @@ function ux_core_draw()
 
 	ux_hero_draw(safe.x + 400, safe.h * 0.6)
 
-	ux_levels_draw(safe.w - 1451, safe.h - 223)
+	ux_levels_draw(safe.x + 320, safe.h - 223)
 
 	ux_core_draw_skillbar()
 
@@ -285,7 +285,7 @@ function ux_core_draw_buttons()
 
 	for _, button in ipairs(buttons) do
 
-		ux_button_draw(button.button, safe.w - button.offset, safe.h - 120)
+		ux_button_draw(button.button, safe.w - button.offset, safe.h - 124)
 
 	end
 
@@ -303,9 +303,9 @@ end
 
 function ux_core_draw_skillbar()
 
-	local skillbar = sprite_clip(skin, 612, 373, 1198, 203)
+	local skillbar = sprite_clip(skin, 612, 373, 903, 153)
 
-	love.graphics.draw(skin, skillbar, safe.w - 1228, safe.h - 223)
+	love.graphics.draw(skin, skillbar, safe.w - 923, safe.h - 204)
 
 end
 
