@@ -13,6 +13,8 @@ require('source/ux_levels')
 
 require('source/ux_pressure')
 
+require('source/ux_tooltip')
+
 --
 
 local FADE_DARK = 0.05
@@ -243,6 +245,8 @@ function ux_core_draw()
 
 	ux_core_draw_buttons()
 
+	ux_tooltip_draw()
+
 	if state == STATE_START then
 
 		love.graphics.draw(cover, 0, 0)
@@ -416,6 +420,8 @@ function ux_core_load()
 	ux_pressure_load(skin)
 
 	ux_levels_load(skin)
+
+	ux_tooltip_load()
 
 	ux_core_create_buttons()
 
