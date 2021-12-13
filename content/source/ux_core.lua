@@ -3,6 +3,8 @@ require('source/broker')
 
 require('source/sprite')
 
+require('source/utils')
+
 require('source/ux_boss')
 
 require('source/ux_button')
@@ -208,11 +210,17 @@ function ux_core_create_skill_button(id, name)
 
 	local pressed = { x = offset, y = 157, w = 145, h = 137 }
 
+	local skill = find_by_id(name, configuration.skills)
+
 	return {
 
 		button = ux_button_new(skills, normal, pressed),
 
-		type = name, offset = 840 - 148 * id
+		type = name, offset = 840 - 148 * id,
+
+		label = skill.label,
+
+		description = skill.description
 	}
 
 end
@@ -505,6 +513,8 @@ function ux_core_update(dt)
 
 	my = (my - pos.y) * unscale.y
 
+	ux_tooltip_hide()
+
 	if state == STATE_FIGHT then
 
 		if can_flee and ux_button_update(flee_button, mx, my) then
@@ -518,6 +528,14 @@ function ux_core_update(dt)
 
 		end
 
+		if flee_button.hovered then
+
+			ux_tooltip_set_position(mx - 20, my - 180)
+
+			ux_tooltip_show('FUITE', 'TODO')
+
+		end
+
 		for _, button in ipairs(buttons) do
 
 			if ux_button_update(button.button, mx, my) then
@@ -528,6 +546,14 @@ function ux_core_update(dt)
 
 					body = { type = button.type }
 				})
+
+			end
+
+			if button.button.hovered then
+
+				ux_tooltip_set_position(mx - 260, my - 180)
+
+				ux_tooltip_show(button.label, button.description)
 
 			end
 

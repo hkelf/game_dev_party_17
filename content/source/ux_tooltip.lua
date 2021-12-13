@@ -1,7 +1,7 @@
 
-local UX_TOOLTIP_HEIGHT = 120
+local UX_TOOLTIP_HEIGHT = 160
 
-local UX_TOOLTIP_WIDTH = 300
+local UX_TOOLTIP_WIDTH = 280
 
 --
 
@@ -57,11 +57,17 @@ end
 
 --
 
-function ux_tooltip_show(x, y, title, description)
+function ux_tooltip_set_position(x, y)
 
-	m_position.x = x
+	m_position.x = math.floor(x)
 
-	m_position.y = y
+	m_position.y = math.floor(y)
+
+end
+
+--
+
+function ux_tooltip_show(title, description)
 
 	m_title = title
 

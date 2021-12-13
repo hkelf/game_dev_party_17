@@ -68,6 +68,8 @@ function ux_button_new(image, normal, pressed, x, y)
 
 	button.state = STATE_NORMAL
 
+	button.hovered = false
+
 	anim_static(button.anim, 'normal')
 
 	return button
@@ -80,7 +82,9 @@ function ux_button_update(button, mx, my)
 
 	local pressed = false
 
-	if ux_button_hovered(button, mx, my) then
+	button.hovered = ux_button_hovered(button, mx, my)
+
+	if button.hovered then
 
 		if love.mouse.isDown(1) then
 

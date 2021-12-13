@@ -204,7 +204,9 @@ configuration = {
                 debt={from=0, to=0},
                 unhappiness={from=0, to= 0},
                 wrath={from=0, to=0},
-            }
+            },
+            label="ATTAQUE",
+            description="Une attaque simple,\npeu coûteuse mais peu\npuissante."
         },
         {
             id="DEFEND",
@@ -216,7 +218,9 @@ configuration = {
                 debt={from=0, to=0},
                 unhappiness={from=0, to=0},
                 wrath={from=0, to=0},
-            }
+            },
+            label="DEFENSE",
+            description="Parfois, la défense reste\nla solution la plus\nadaptée."
         },
         {
             id="FIREBALL",
@@ -227,7 +231,9 @@ configuration = {
                 debt={from=0, to=0},
                 unhappiness={from=0, to=0},
                 wrath={from=0, to=0},
-            }
+            },
+            label="DEFERLANTE",
+            description="Une vague d'énergie\nqui transperce votre\nennemi."
         },
         {
             id="OMNISLASH",
@@ -238,7 +244,9 @@ configuration = {
                 debt={from=0, to=0},
                 unhappiness={from=0, to=0},
                 wrath={from=0, to=0},
-            }
+            },
+            label="OMNISLASH",
+            description="Un coup surpuissant,\nmais qui demande\ndes sacrifices."
         },
         {
             id="BERSERK",
@@ -250,7 +258,9 @@ configuration = {
                 debt={from=0, to=0},
                 unhappiness={from=0, to=0},
                 wrath={from=15, to=15},
-            }
+            },
+            label="BERSERK",
+            description="Canalisez votre rage\nintérieure pour mieux\nla libérer."
         },
         {
             id="BLEED",
@@ -261,7 +271,9 @@ configuration = {
                 debt={from=0, to=-5},
                 unhappiness={from=0, to=-5},
                 wrath={from=0, to=-5},
-            }
+            },
+            label="VAMPIRISME",
+            description="Une méthode sang\npour sang naturelle\nde se ressourcer."
         },
     },
     buff={
