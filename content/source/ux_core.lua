@@ -118,6 +118,8 @@ local unscale = { x = 1, y = 1 }
 
 local win = nil
 
+local current_boss = nil
+
 --
 
 function ux_core_corridor(payload)
@@ -343,6 +345,8 @@ function ux_core_fight(payload)
 
 	ux_boss_fight(payload.body.ennemy.id)
 
+	current_boss = payload.body.ennemy.id
+
 	can_flee = payload.body.ennemy.fleeable
 
 	ux_core_fade(FADE_DARK, 1, -1)
@@ -497,21 +501,21 @@ function ux_core_update(dt)
 
 	fade_alpha = math.max(math.min(fade_alpha, 1), 0)
 
+	local mx, my = love.mouse.getPosition()
+
+	mx = (mx - pos.x) * unscale.x
+
+	my = (my - pos.y) * unscale.y
+
 	ux_hero_update(dt)
 
-	ux_boss_update(dt)
+	ux_boss_update(dt, mx, my)
 
 	if state == STATE_WALK then
 
 		corridor_x = corridor_x - 750 * dt
 
 	end
-
-	local mx, my = love.mouse.getPosition()
-
-	mx = (mx - pos.x) * unscale.x
-
-	my = (my - pos.y) * unscale.y
 
 	ux_tooltip_hide()
 
@@ -583,6 +587,34 @@ function ux_core_update(dt)
 
 		end
 
+	end
+
+	if ux_boss_hovered(mx, my) then
+		
+		ux_tooltip_set_position(mx - 20, my - 180)
+		
+		if current_boss == 'breakup' then
+
+			ux_tooltip_show('RUPTURE', 'Et si je coupais\nles ponts ?')
+		
+		elseif current_boss == 'finance' then
+		
+			ux_tooltip_show('DETTES ET FACTURES', 'Je vais les régler\nune bonne fois \npour toutes.')
+		
+		elseif current_boss == 'mourn' then
+		
+			ux_tooltip_show('DEUIL', 'Essayons d\'aller\nde l\'avant...')
+		
+		elseif current_boss == 'neighbour' then
+		
+			ux_tooltip_show('VOISINS', 'J\'ai simplement à\ntoquer à leur porte...')
+		
+		elseif current_boss == 'work' then
+		
+			ux_tooltip_show('TRAVAIL', 'Si je m\'organise tout\ndevrait bien se passer.')
+		
+		end
+		
 	end
 
 end

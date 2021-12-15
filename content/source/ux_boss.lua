@@ -19,6 +19,10 @@ local skin = nil
 
 local visible = false
 
+local boss_x = 0
+
+local boss_y = 0
+
 --
 
 function ux_boss_attack(attack)
@@ -60,6 +64,8 @@ function ux_boss_draw(x, y)
 		local filled = sprite_clip(skin, 622 + offset, 210, 374 - offset, 57)
 
 		love.graphics.draw(skin, filled, x + 150 + offset, y - 50)
+
+		boss_x, boss_y = x , y
 
 	end
 
@@ -152,12 +158,12 @@ end
 
 --
 
-function ux_boss_update(dt)
-
+function ux_boss_update(dt, mx, my)
+	
 	if visible then
-
+		
 		anim_update(anim, dt)
-
+		
 	end
 
 	if hit < 10 then
@@ -165,5 +171,19 @@ function ux_boss_update(dt)
 		hit = hit + 10 * dt
 
 	end
+
+end
+
+--
+
+function ux_boss_hovered(mx, my)
+
+	if not visible then return false end
+
+	local w, h = 624, 702
+
+	local x, y = boss_x - w * 0.5, boss_y - h * 0.5
+
+	return mx >= boss_x and mx <= boss_x + w and my >= boss_y and my <= boss_y + h
 
 end
