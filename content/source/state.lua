@@ -19,10 +19,6 @@ end
 win = false
 
 function update_state(dt) 
-    if not win and #game_state.ennemy_pool == 0 then
-        win = true
-        broker_send("win", {})
-    end
     
     if not game_state.scene.type then
         init_title()

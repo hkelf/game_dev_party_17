@@ -30,10 +30,11 @@ local init_ennemy_pool = function(game_state)
 
     game_state.ennemy_pool = table.clone(configuration.ennemies)
 
+    shuffle(game_state.ennemy_pool)
+
     while not #game_state.ennemy_pool == pool_size do
         table.remove(1, game_state.ennemy_pool)
     end
-
 end
 
 function initialize_state() 
