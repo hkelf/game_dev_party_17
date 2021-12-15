@@ -70,6 +70,35 @@ local ITEM_COORDS = {
 	MUSIC = { x = 10, y = 439 }
 }
 
+local ITEM_TRAD = {
+
+	SALARY = "Encaisser son salaire",
+
+	NAP = "Faire une sieste",
+
+	MEDITATION = "Seance de méditation",
+
+	LAUGH = "Aller rire",
+
+	EXERCISE = "Se défouler",
+
+	VIDEO_GAME = "Jouer",
+
+	DRINKING = "Boire un coup",
+
+	SEXY_TIME = "COÏTER",
+
+	DRUGS = "Prendre des cachets",
+
+	MEET_FRIENDS = "Aller voir du monde",
+
+	FOOD = "Se faire\nun bon resto",
+
+	CHILLING = "Glandouiller",
+
+	MUSIC = "Ecouter du bon son\n(comme dans ce jeu)"
+}
+
 --
 
 local buttons = { }
@@ -119,6 +148,10 @@ local unscale = { x = 1, y = 1 }
 local win = nil
 
 local current_boss = nil
+
+local item1 = nil
+
+local item2 = nil
 
 --
 
@@ -187,6 +220,8 @@ end
 --
 
 function ux_core_create_item_buttons(choice)
+
+	item1, item2 = choice[1], choice[2]
 
 	local lpos = ITEM_COORDS[choice[1]]
 
@@ -563,7 +598,51 @@ function ux_core_update(dt)
 
 		end
 
+		if ux_boss_hovered(mx, my) then
+			
+			ux_tooltip_set_position(mx - 20, my - 180)
+			
+			if current_boss == 'breakup' then
+
+				ux_tooltip_show('RUPTURE', 'Et si je coupais\nles ponts ?')
+			
+			elseif current_boss == 'finance' then
+			
+				ux_tooltip_show('DETTES ET FACTURES', 'Je vais les régler\nune bonne fois \npour toutes.')
+			
+			elseif current_boss == 'mourn' then
+			
+				ux_tooltip_show('DEUIL', 'Essayons d\'aller\nde l\'avant...')
+			
+			elseif current_boss == 'neighbour' then
+			
+				ux_tooltip_show('VOISINS', 'J\'ai simplement à\ntoquer à leur porte...')
+			
+			elseif current_boss == 'work' then
+			
+				ux_tooltip_show('TRAVAIL', 'Si je m\'organise tout\ndevrait bien se passer.')
+			
+			end
+			
+		end
+
 	elseif state == STATE_ITEMSEL then
+
+		if item_left.hovered then
+
+			ux_tooltip_set_position(mx - 20, my - 180)
+
+			ux_tooltip_show('Option 1', ITEM_TRAD[item1])
+			
+		end
+		
+		if item_right.hovered then
+			
+			ux_tooltip_set_position(mx - 20, my - 180)
+
+			ux_tooltip_show('Option 2', ITEM_TRAD[item2])
+
+		end
 
 		if ux_button_update(item_left, mx, my) then
 
@@ -587,34 +666,6 @@ function ux_core_update(dt)
 
 		end
 
-	end
-
-	if ux_boss_hovered(mx, my) then
-		
-		ux_tooltip_set_position(mx - 20, my - 180)
-		
-		if current_boss == 'breakup' then
-
-			ux_tooltip_show('RUPTURE', 'Et si je coupais\nles ponts ?')
-		
-		elseif current_boss == 'finance' then
-		
-			ux_tooltip_show('DETTES ET FACTURES', 'Je vais les régler\nune bonne fois \npour toutes.')
-		
-		elseif current_boss == 'mourn' then
-		
-			ux_tooltip_show('DEUIL', 'Essayons d\'aller\nde l\'avant...')
-		
-		elseif current_boss == 'neighbour' then
-		
-			ux_tooltip_show('VOISINS', 'J\'ai simplement à\ntoquer à leur porte...')
-		
-		elseif current_boss == 'work' then
-		
-			ux_tooltip_show('TRAVAIL', 'Si je m\'organise tout\ndevrait bien se passer.')
-		
-		end
-		
 	end
 
 end

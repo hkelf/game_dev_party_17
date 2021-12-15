@@ -7,7 +7,7 @@ configuration = {
     initial_debt=0,
     initial_unhappiness=0,
     initial_wrath=0,
-    number_of_ennemies=3,
+    number_of_ennemies=5,
     ennemies={
         {
             id="breakup",
