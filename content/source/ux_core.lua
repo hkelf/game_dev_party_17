@@ -284,9 +284,13 @@ function ux_core_draw()
 
 	ux_levels_draw(safe.x + 320, safe.h - 223)
 
-	ux_core_draw_skillbar()
+	if state == STATE_FIGHT then
 
-	ux_pressure_draw(safe.x + 124, safe.h * 0.5 - 350)
+		ux_core_draw_skillbar()
+
+		ux_pressure_draw(safe.x + 124, safe.h * 0.5 - 350)
+
+	end
 
 	ux_core_draw_buttons()
 
@@ -332,10 +336,14 @@ function ux_core_draw_buttons()
 
 	end
 
-	for _, button in ipairs(buttons) do
+	if state == STATE_FIGHT then 
 
-		ux_button_draw(button.button, safe.w - button.offset, safe.h - 124)
+		for _, button in ipairs(buttons) do
 
+			ux_button_draw(button.button, safe.w - button.offset, safe.h - 124)
+
+		end
+	
 	end
 
 	if state == STATE_ITEMSEL then
