@@ -72,31 +72,31 @@ local ITEM_COORDS = {
 
 local ITEM_TRAD = {
 
-	SALARY = "Encaisser son salaire",
+	SALARY = "\nEncaisser son salaire",
 
-	NAP = "Faire une sieste",
+	NAP = "\nFaire une sieste",
 
-	MEDITATION = "Seance de méditation",
+	MEDITATION = "\nSéance de méditation",
 
-	LAUGH = "Aller rire",
+	LAUGH = "\nAller rire",
 
-	EXERCISE = "Se défouler",
+	EXERCISE = "\nSe défouler",
 
-	VIDEO_GAME = "Jouer",
+	VIDEO_GAME = "\nJouer",
 
-	DRINKING = "Boire un coup",
+	DRINKING = "\nBoire un coup",
 
-	SEXY_TIME = "COÏTER",
+	SEXY_TIME = "\nCOÏTER",
 
-	DRUGS = "Prendre des cachets",
+	DRUGS = "\nPrendre des cachets",
 
-	MEET_FRIENDS = "Aller voir du monde",
+	MEET_FRIENDS = "\nAller voir du monde",
 
-	FOOD = "Se faire\nun bon resto",
+	FOOD = "\nSe faire un bon resto",
 
-	CHILLING = "Glandouiller",
+	CHILLING = "\nGlandouiller",
 
-	MUSIC = "Ecouter du bon son\n(comme dans ce jeu)"
+	MUSIC = "\nEcouter du bon son\n(comme dans ce jeu)"
 }
 
 --
@@ -612,7 +612,7 @@ function ux_core_update(dt)
 			
 			if current_boss == 'breakup' then
 
-				ux_tooltip_show('RUPTURE', 'Et si je coupais\nles ponts ?')
+				ux_tooltip_show('RUPTURE', '\nEt si je coupais\nles ponts ?')
 			
 			elseif current_boss == 'finance' then
 			
@@ -620,15 +620,15 @@ function ux_core_update(dt)
 			
 			elseif current_boss == 'mourn' then
 			
-				ux_tooltip_show('DEUIL', 'Essayons d\'aller\nde l\'avant...')
+				ux_tooltip_show('DEUIL', '\nEssayons d\'aller\nde l\'avant...')
 			
 			elseif current_boss == 'neighbour' then
 			
-				ux_tooltip_show('VOISINS', 'J\'ai simplement à\ntoquer à leur porte...')
+				ux_tooltip_show('VOISINS', '\nJ\'ai simplement à\ntoquer à leur porte...')
 			
 			elseif current_boss == 'work' then
 			
-				ux_tooltip_show('TRAVAIL', 'Si je m\'organise tout\ndevrait bien se passer.')
+				ux_tooltip_show('TRAVAIL', '\nSi je m\'organise tout\ndevrait bien se passer.')
 			
 			end
 			
