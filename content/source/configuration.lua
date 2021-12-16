@@ -279,14 +279,14 @@ configuration = {
     buff={
         {
             id="resistance",
-            rounds=4,
+            rounds=5,
             -- percentages 
             resistance=45,
             damage_boost=0,
         },
         {
             id="berserk",
-            rounds=2,
+            rounds=3,
             -- percentages 
             resistance=0,
             damage_boost=20,
