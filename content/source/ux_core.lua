@@ -579,7 +579,7 @@ function ux_core_update(dt)
 
 			ux_tooltip_set_position(mx - 20, my - 180)
 
-			ux_tooltip_show('FUITE', 'Une solution temporaire\npour reprendre un peu\nson souffle.')
+			ux_tooltip_show('FUITE', 'Mettez un problème de\ncôté pour vous en\noccuper plus tard.')
 
 		end
 
